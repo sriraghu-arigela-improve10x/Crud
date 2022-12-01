@@ -4,8 +4,10 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface MessageService {
     @GET("sriraghuMessageHistory")
@@ -13,4 +15,7 @@ public interface MessageService {
 
     @POST("sriraghuMessageHistory")
     Call<Message> createTask(@Body Message message);
+
+    @DELETE("sriraghuMessageHistory/{id}")
+    Call<Void> deleteMessage(@Path("id")String id);
 }

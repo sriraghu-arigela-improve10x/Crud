@@ -56,6 +56,24 @@ public class MessagesActivity extends AppCompatActivity {
         });
     }
 
+    public void deleteMessage(Message message) {
+        MessageApi messageApi = new MessageApi();
+        MessageService messageService = messageApi.createMessageService();
+        Call<Void> call = messageService.deleteMessage(message.id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Toast.makeText(MessagesActivity.this, "Successfully Deleted", Toast.LENGTH_SHORT).show();
+                fetchTask();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(MessagesActivity.this, "Fail to delete Message", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     public void addMessageActivity() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
@@ -69,6 +87,23 @@ public class MessagesActivity extends AppCompatActivity {
         messageRv.setLayoutManager(new LinearLayoutManager(this));
         messageAdapter = new MessageAdapter();
         messageAdapter.setData(messageList);
+        messageAdapter.setOnItemActionListener(new OnItemActionListener() {
+            @Override
+            public void onItemClicked(Message message) {
+                Toast.makeText(MessagesActivity.this, "On Item Clicked", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemDelete(Message message) {
+                Toast.makeText(MessagesActivity.this, "On Item Delete", Toast.LENGTH_SHORT).show();
+                deleteMessage(message);
+            }
+
+            @Override
+            public void onItemEdit(Message message) {
+                Toast.makeText(MessagesActivity.this, "On Item Delete", Toast.LENGTH_SHORT).show();
+            }
+        });
         messageRv.setAdapter(messageAdapter);
     }
 

@@ -13,10 +13,15 @@ import java.util.List;
 public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
 
     public List<Message> messageArrayList;
+    public OnItemActionListener onItemActionListener;
 
     public void setData(List<Message> messages) {
         messageArrayList = messages;
         notifyDataSetChanged();
+    }
+
+    public void setOnItemActionListener(OnItemActionListener listener) {
+        onItemActionListener = listener;
     }
     @NonNull
     @Override
@@ -32,6 +37,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
         holder.titleTxt.setText(message.title);
         holder.numberTxt.setText(message.phoneNumber);
         holder.messageTxt.setText(message.message);
+        holder.deleteBtn.setOnClickListener(view -> {
+            onItemActionListener.onItemDelete(message);
+        });
+        holder.itemView.setOnClickListener(view -> {
+            onItemActionListener.onItemClicked(message);
+        });
     }
 
     @Override
