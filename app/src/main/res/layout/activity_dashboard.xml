@@ -9,7 +9,6 @@
     tools:context=".DashboardActivity">
 
     <ScrollView
-        android:id="@+id/crud_sv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -32,5 +31,21 @@
         android:layout_marginTop="4dp"
         android:gravity="center_horizontal"
         android:text="Messages"
-        android:textColor="#0C0909" />
+        android:textColor="#090707" />
+
+    <ImageButton
+        android:id="@+id/template_img_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center_horizontal"
+        android:text="Templates"
+        android:textColor="#090707" />
 </LinearLayout>

@@ -13,9 +13,21 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         getSupportActionBar().setTitle("Dashboard");
+        handleMessageBtn();
+        handleTemplatesBtn();
+    }
+    public void handleMessageBtn() {
         ImageButton imageButton = findViewById(R.id.image_btn);
         imageButton.setOnClickListener(view -> {
             Intent intent = new Intent(this, MessagesActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    public void handleTemplatesBtn() {
+        ImageButton templateImageBtn = findViewById(R.id.template_img_btn);
+        templateImageBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(this, TemplatesActivity.class);
             startActivity(intent);
         });
     }
