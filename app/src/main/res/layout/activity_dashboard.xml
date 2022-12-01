@@ -48,4 +48,20 @@
         android:gravity="center_horizontal"
         android:text="Templates"
         android:textColor="#090707" />
+
+    <ImageButton
+        android:id="@+id/series_img_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center_horizontal"
+        android:text="Series"
+        android:textColor="#090707"
+        android:textSize="16sp" />
 </LinearLayout>

@@ -15,7 +15,9 @@ public class DashboardActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Dashboard");
         handleMessageBtn();
         handleTemplatesBtn();
+        handleSeriesBtn();
     }
+
     public void handleMessageBtn() {
         ImageButton imageButton = findViewById(R.id.image_btn);
         imageButton.setOnClickListener(view -> {
@@ -30,5 +32,13 @@ public class DashboardActivity extends AppCompatActivity {
             Intent intent = new Intent(this, TemplatesActivity.class);
             startActivity(intent);
         });
+    }
+
+    public void handleSeriesBtn() {
+       ImageButton seriesImageBtn = findViewById(R.id.series_img_btn);
+       seriesImageBtn.setOnClickListener(view -> {
+           Intent intent = new Intent(this, SeriesActivity.class);
+           startActivity(intent);
+       });
     }
 }
