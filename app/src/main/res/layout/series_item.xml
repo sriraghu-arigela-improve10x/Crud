@@ -3,25 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp"
-    tools:context=".SeriesActivity">
+    android:padding="8dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/siries_rv"
+    <ImageView
+        android:id="@+id/series_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/ic_launcher_background" />
 
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <Button
-        android:id="@+id/add_btn"
+    <TextView
+        android:id="@+id/title_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#00BCD4"
-        android:text="Add"
-        android:textAllCaps="false"
+        android:layout_marginTop="4dp"
+        android:gravity="center_horizontal"
+        android:text="Text"
+        android:textColor="#050404"
         android:textSize="16sp" />
 </LinearLayout>

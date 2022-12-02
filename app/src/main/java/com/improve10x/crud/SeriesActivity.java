@@ -1,14 +1,26 @@
 package com.improve10x.crud;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SeriesActivity extends AppCompatActivity {
 
     public ArrayList<Series> seriesList;
+    public RecyclerView seriesRv;
+    public SeriesAdapter seriesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,19 +28,61 @@ public class SeriesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_series);
         getSupportActionBar().setTitle("Series");
         setData();
+        seriesRv();
+        addSeriesActivity();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchTask();
+    }
+
+    public void fetchTask() {
+        SeriesApi seriesApi =new SeriesApi();
+        SeriesService seriesService = seriesApi.createSeriesService();
+        Call<List<Series>> call = seriesService.fetchTask();
+        call.enqueue(new Callback<List<Series>>() {
+            @Override
+            public void onResponse(Call<List<Series>> call, Response<List<Series>> response) {
+                List<Series> series = response.body();
+                seriesAdapter.setData(series);
+            }
+
+            @Override
+            public void onFailure(Call<List<Series>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void addSeriesActivity() {
+        Button addBtn = findViewById(R.id.add_btn);
+        addBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(this, AddSeriesActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    public void seriesRv() {
+        seriesRv = findViewById(R.id.siries_rv);
+        seriesRv.setLayoutManager(new LinearLayoutManager(this));
+        seriesAdapter = new SeriesAdapter();
+        seriesAdapter.setData(seriesList);
+        seriesRv.setAdapter(seriesAdapter);
     }
 
     public void setData() {
         seriesList = new ArrayList<>();
 
-        Series narasimha = new Series();
-        narasimha.title = "Narasimha";
-        narasimha.imageUrl = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhMSExIVFRUVFRUVFxgVFRUWFRcXFRUWFhUVFRUYHSggGBolHhUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGhAQGi0dHx0tLS0tKy0tLS0tLS0tLS0tLS0tLS0tLi0tLS0tLS0tLS4tLS4tLS0tLS0tLS0vKy0tLf/AABEIAKgBLAMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAADAAIEBQYBBwj/xAA/EAABAwMCBAIHBQcDBAMAAAABAAIRAwQhEjEFQVFhE3EGFCIygZGxQlKhwdEjYnKi0uHwFTOSB1OTwhZzgv/EABoBAAIDAQEAAAAAAAAAAAAAAAEDAAIEBQb/xAAxEQACAgIBAgMHAwMFAAAAAAAAAQIRAyExEkEEIlETYXGBkaHwMrHRFFLBBSNCcuH/2gAMAwEAAhEDEQA/APFAF0BJdSzWkLStD6P8Lp6mvr7T7u3kXdlX8LsDVcMHTzcOQHNXl/WqEgwC3ABiJAxPTkilehOefTpFrxS5ZTdpZsT0EDyUSzqMDxq2J3UqlRZUpF7jMkey0wAfgo/EaINLYQNswcfmrJ9jGzt9e27ajajTJjLT1GyFV9KiMtADtpb281mLhkHP4oQqgJtL0BRfVOP1nSS45QWcTqk5eYycuVLcV9gNkxtyQEXYVE2fDvSKpSaA04591oLD0t1CHgR15rzSldDHXmp9O5OM+UfglMNHonFeOsdT0t3074yUrG1F3RDB7zZMn6TzWEoXOrErVcC4t4bQxsFxM5OI7mcJckBqgV/wV9OXAEsEe1yM8h3UNrVrP/kDQ4AgEjdoyG9YOxKicftmECvSHsOJGJgHmOxVaZUzjmqdw0ZCiuCl8M3Sc/BaHJqLEKytqckBV1gMK2szDguPPk3RNLwq0AhaO3pQFScOrCFd0KwK1eDULtlsl1okBIhIFKV2LiZiNc0QQsxxu0HJaa4rhUPEHyuR4tQctGnHdbMjWokKuu6Rgq+u4VReHCzwRHAyPFKcSs1WdkrScfccrEVro6tiupgbaM04FnbCSZTLxmkylY1SUS9ILU1S2KcSNSuFLZXVYxsI1MqzSIix1IbmoNN6e5yqEC8LgC485RGHCNlDOroXEWjV0zjkQmnSbpWWh4kadLwmHf3th5CQiUb90BpEYxzaTyIzsqEGTlGY8AEEY64kdwU1KjBN2y1sOJ6H5JAnLZxhWF7xZlQe6BzkbnzGyy4EmBn6qWKJQdJleixl3UlyhOUo2x6fVBrUSN0epDOloC4riIKJTxRU6kGgbQp9FjyMAp9pw/V281f0LB7G4h34LPkzJPQ6GHq2ylo1dG/1j6QjNrvBDgG/AYz5/qpN7aBwmIPQgqroS0xMfPKkZ9QueOmaWnx0BoDpaQI2iOZIPI9lbcO4zDHZaQWwdRMwd9IPPZY1zgTp5jaeSm2Fy+mS4hrnZy5oePMA4lFpCHEuqQ1DBJ7n81N4aMqtsaz3t1OIcDtEACOzRjkrXhoys+f9NEj+o09i3CsqYUKxbhWLWLiy5NkQ1K9c1TKfpHp3CrHthVF/VhVTd6Gps17fS9vdI+lrTsCvMK/EMo9nxAlMftK5Do9I/wBWlBr3UhZyyupCsA/CnVYUcuHqruHKbWUKo1WiyWZ/idvqlZa44SJlbi5pKtrW614p0LlTM7TtA0IdS3V3Ut0B9BOWQRKJTut0zwVavoqO+mmKdi2iIGJFqK9qC96YnZUE5uU5qEako9MYRZRGaRXe6OpTAFLbSlo7SnrTN+W+giU6BJAxnqVIdQA+G/8AZN8Mqx4fwqpUgMpue48mtLj8gjKVbMiTYGxpA/Zz1CsharScI9EniPGLaAP38u/4Nz81eD0Oa4w26oH/AMg/9VjeW3o3Qw0jCQYiAgusHPK0/FuBvt6nhuh2JDmHU0jaQVIs7DnCW8rRdYr5M0OCGNpUKpw3S4iPL9F6FRs+ij8Q4RrbPMKizPuM9nGtGf4ZbAgHeVbMsiNsD8EThdrnbvHcbhamlbNcyY3CXOWwxZkrzhhLds9uayfFrICTHtDeRn4L0/wIJHxWN9JaY1npCZhyboVmgmrMcGAgf4VMbqaJ94deY80N9OD0Umm7GIPXr8ua3Wc9on8DcC0x1Wi4W3Kp+EMbowCBOeeVdcMHtLPnfkYtakayyGArFjVAstlYMK4suTYjj2Km4nRkFXZcq2/k4AkkhoHUuMAZ7kIJF0m3SMLe0YcpXD6KlcQ4XXN0LUUz4xMBpLQTicSdMQN5hLhNvUNZ1AMJqML9TWwSPDku7Y0nz2EkhaXGXTx+fyM9jPsvd+fLd8e8vLOhAVixqHwii+rim0vMajpLcDafaIVhcWlWmAX0ntBOkE6SJOwJY4x8Y6blZuiVdSi69adfXgChKvy/pyV9RiE6mpLyY1QdOrTqxp1xq0bzqjPkj2tjWqguZSe5skSNAEjcAucJjbHMEcleCk3STfyf1LOEu+tXvWnwUdaiodW3Whr2NVusGk8GmzxHg6cMzDt/aGHe7OxUO+s303aHsc1/IESc7ERIIOw3yCNwQmpyW2mvkCWHJFX08/8Anz7r3bW9oz9W3UWpQWnuuEVmB5fTc0M0aySzHiGGyA6cnptzhQalk7w/G0nw9fhziNcatMTO2ZiE1NrTT+guWHJvXCb7cKv5Xyaa0zOPoqLVpLRXNm5rWvLSGP1aHYg6CA6OsEgKsrtCbGTEThKOpKvz8+HDp2ihrBV9bsr2tQnko7rBaI5KEvZR06ZlT6bDCl+oxyRBboyyJgoydOlK1PBfQ68rM1soO0HIc7S1p7jURI8lY+jPo3pAuLhvsjLKbhl53BcPu9ua2dO+q1t3EN+6DA7bKuXxNPR1o4uvXYzNp6EUqUOuKmt3/apf+1T9PmtBSrVKTNFI+FTH2WY+ZG6mmzEdCqq/fUa8MxpIzEz5FZXmlN8jVgjAHcVwQQJJPM9fNDoXD28whPuA8Q39FW3d14ZhzvgN0FFyLOfTsuhenUQXH4EgR2VpZXFNoJ3nl1WIHE592mT3cfyCm2Xjv56fIQi8evQMc1+8vOL3LKTabRGvnHTuu2FzrGyq6XCCTJJJ75KtLehpQ4QHt2Bu6fhvFQCGu97sequuGP8AZjuVXX1Eupu+H4FTrFmlondBytC+nZIuKWMcvod1huN0vacCt04ysn6TW8OB6j6I4n5gTj5TGXFJdo0h5FTKlPKG6mt6fY57RZcEqAEh7ZBGd47GOv6q04fGoxtOJVVwxpDSeasLB3tJeT9IhvZsbI4UsOVdZHAUvUuTJbNCDlyjNP7WkeQq0yewFRq6XoNTKMdOxkJ9MlL0aZpv9Vtqt94dYNbUoVJt6wIAcC0F1JztvtGOR2wfejejtCjaPubmpVptfXuKgbPt/sm1STDWx70HO3unPPJ1rYE7JtO3IjSGg85n8gVr/rGttXtv6/x+cGlZoyXRVcJbSSSv1Tq738Wq8xs7UUaFW6e0sdSqW7qjA18SHEk0gfsmdoGA5vRLiFy19sBbtEPqM8Rrnkva9rmlgIefc1BsvBIjMRJGXY2oOVL+f+lPmoeVL+f+lKfitOKjSd/d3p0aetNp2vf5+X9ld2715qfCo2L2Wxo+p+OydOHQ7/fB1l5f7savs+bZ5KLwUF9u1jxRcab6o0uuX0nsPiOkO0BwdmSDjEeaytTxIjTS+b/6VEqavu0/5v0V/wCqt301SrXpqltPgkJqN7Td3fWl63+lR5v1182ba7fSaboCoCfUQCPFNQNd+0ljHOz93EDcGBKFx/0mbSq1W+Eyq6nBoPEHQ51NpfqO8CZxvgY3GKLT0Z/N+iZDulP+b9FeXipNUlXy+Pu94JZU6flbXrNcVFPje1Gvm7tXfoXGL2k0XZeGVhptvYD41nURuJ2JBwOSpapp3djTp0qbbfXdgEGoXAAUzqqS6DAHL93usm5p/c/H9Ew0+oBPYf2RfiHNvXP83zVi5Z4Y1tKSqqU7/wCKjuPDWner3zo9F4vTtLmg60pVqZNJoNIDBDqUiC8mDqyJ7k5XmBpRvuUdzE0hGeTrd1Rgy5Y5EtO75bT554S/G+erUZ1IJhphSSFwhUszkN9IIfhhS3BMhWshc6X1XZ3/AACvaVmGU989ULh1tGVJuagODt9ewWWTtnoIqiqrmrpmQAPn9FHY1oEveepOM+ZUy4oknm0dASsrxkFxNJkxucn6q+OPW6Kzk4r1GV+LNl7KQn2idXmeSgvsaj5cGkk7nJVrwjhDQJOeqs7vi9O2b7IBdGB+qepU6grEPH1K5syNKnUbtE+asbK+qAwR8VVMDqhccgkyNJgDOQRzCsadB7Wt5unJ5EfqnTSrZnhaerNDbXxMBCurx7Dsolo6HAd1ccTtpaC3pKzOk6Ni2rKd3F6zhAaR8IU3h5rOMznuoLrapAIcQ7Mg7Z6QZnmr21s3kMJfMDIO8/uncDzKtJpKlQhRbluywt3EjIyqP0rZOj4haGk2Aqf0hA0tPLUkwfmQ6S8rMe0TyyE71YO2UunT0te+ORjzXKewXQh5jl5n0JDaLdDSBz3/ALHkjWO6a5Otd1bIvKY1K3bNPZOwpYKgWRwFOlcpx2a0x5TCkSuIUQaQk0LpT6VNztgTH4eaFBFK6Ck9pGCITqdFzhIaY68kCIGWFxgCSo1TwwYNST+62Wj/APXMdxKkXtOoWaWAyXHW3IcRjTv9nf8ABRK1EPfTp+C2g5oIqENgu2cXu6mBiSd91bHBVZ1fCeEw5IdeSWqbdNJxS7tcu+yr48jarS0kHl/mFa0OCg0zJOsxA8+g5gYk8tXZQ7iiNY1ODHPy1p5CPZ1H7MwAP0ypTq59l5kEMqyBomQ6mHNBLZDXapIHTEJmu9nOjjr9aatWtFI9sEg8kxlIuMAEk7AIr3lziTuTPzUqtUdSilSa7U4ZdDg986hFOdm4Ptc4OQAiuQ+G8NLxE+lNJLbb4SB1eGBo/aVWMd93LnDz0zCgXFEtMYPcGQR5q1pWdKm0Or1NTjkU2e0NzlxxOx5gb+8gvumOJLaAcAM6tR0jyZAaEb9DdP8A072iX9Om1/dJqKf/AFT38yqcENwVkw062GtDXZjQS5pI+yQSSD8VXlFHOz4MmCXTNfe19QLwhorkOFdCTeMw1MpU5yfIeXVBbXER0/wItOqOqyNep3nI46jKoDYgPqGM6jJ+i0jbhqo+MXraTaj/ADPnOw+f1TMad0gSeitubltL2euwWZu6bnv+Kktu21n6gHSN5jn0jkrCnaT7S2xj0L3mOcnJ12AWNjpEqRU1dFJY/SOqA55duYVBiS4OWQ9oea2PslrQOkLL2FKXtHU7rZW9BopiBuTnyWee2PiVj7QTj5IrQ6IGyBeNcHYzjMbIlpcbKr2SqZNbRIaqbjfudpV/Uqy1Vr6YcSCJUWnZST0Zus0igcQCR8yf7KvYrDir3FxaSdIcYHKNlDaxdLBGo/E43ip9Uvhoa5K33TnNXLduUzIvKZlyaCx2U6VAslMC5co7NKY+VyVxJVIGZpa3xKh9mYDR7zz0HQd1GF6argyo/wAKlEgNB0mDABnf+IyAp1NrGhoqs8RziDTpAS4nk4/dH1Cj3N94jXUjTd4pqBrWmCxhDoJBOWkQWxEQUV+M7v8Ap8WoKSht8ztXGP8AdFPher+jsNc12UWgmmS7LWNM6BpH2nH3j2/JQmNfce1VrAAT+zB9uBvpZ7rR3ycbKRxisRoptaXUwKbnRIFQtOkguG2BHbVPRPtKLX1X1zT8CixvPGSyIaMauZnr8YCvp1yXwpYvC9a1OSbUk05N3qNPab71x69k3wnVMNmGjLnumBzLnHb6JpuKIc1kl7iQw1AGt0hxAnURLm9cjAQa92ax0NmnRZ7RA3jYF3V55A4GTnSh1ND2aAxlOHSDpgkEQQ54Bc44BzOyPSk97ZlWDBhn0eIfmlzXEbXek7fu4H8TtfEfTpM0mo5uh2iI1FzsuI3IbEnoOyl3dy41HigzxPDFQvedJBB0lxAOMeHjmcwFDtaraXuZJw50aTpP2W9PPnhK3tHjV4T/AGXjS6NeotGwLQMnJ5xvkSpaXJoj4jws9Skv9tJR603e7k6Xf0Xoct6fjNc46W6NOp8Q3S7VBIHMaeW8hd9dY0Q1rniC0PeC2RI1Bkcpic+YUz/TqjqXgtYabQ/WC/2dZiJeeR6Yjkh1OF1NLadSvSAYDoaKjXNBcZMmRAOdgfyUTS5/yVwrwM5PLJacn5alpduPXl7pLSVgKlL9iXO9wta6lJBcHOguYI3gTI7cl1tw42opa4l40tkN1Uw2CCcDDpOeh6AJreFFplzqT+jadVpLvM4geUnyUa7tqpOpzIGwgeyANgI5KKimbxEfDwjjwtz6ZdVtaXuSfbv8Qla5dLXVHNLmMFNjW6ZAaCGyWYgA9fzmqciOQnK+3tnLzZpZZXLtpJaSXokCcmQiuCEroUX1QPEYI+CA+5LRkx5mPqvQfSLgwqNPLHJeRcW4W6m8grdLwST5HrxLRNrcfpt+3PkCVneOcXNaGiQ0ZzuT3XKlqUH1Mq0fDxi7RdeIbHcAI8YNP2sfHcfRbF1IsBCyNK1LSCMEEEfDZb2kRWotqxEiD5jf8UrNHZOrZnr+tpCrqlw92ACry8tAd1AqWhBDhMAyRMSqRou+pvQKxualPljvy8irZnHqkadgPPKs+FXdu5ml7Wg/vCD8wpzbSyzL2749vYTGM/FIl0t7ReMppVsrLbjTII0Qm0r1pILcdR+YRavCw9x8IlrMy6Mu7CeXdNbwoU3SCT5qrjEa3Otly18gLjWLlsOSdf3DaQb9550tH1Pw/NUULA5UQ/Sj0fNF4cJLH+00nr9oGOh/JURtYXsLLJtzatY7pg9D1WI4lwR1Jxa4eR5EdQuq1UbXByMsLbMdUpoVNuVd3Nmq8UIKEtozrkn2amhRbVkKTC5s1s1J6HFFa8MZ4rhOYY0/ad3/AHRz+XNARajmkhxAdDdDWuALAD7xg7uJJ8vlFKH4HjU7yK0u3r7vd+LuDoF0Gq8k1KuxO4Ydz2mI8h3XfEyXaRqIgu+0eR8p5xvzTHOn4AARgADAAHRNQYc+eWXJKb79vd2XwQalUcDDSRPQlC4zdkkUWkuDDmJJfUmDHWDgIts+DqBAIBgnkdge8b/BDbobGhslskPdOqTGYBjljeJOcoKlujR4HPi8O3lkrlxFemuX/j5kjh9kQx9J4YCHF0teC5ziAMuJ0tY0A994EmSFlKiCYL6xG4osJaP4nwo5qEfGQZyCDuCEytcvdguMDYbAeQ2CN2xUs0ZNznG298tL7b+5PdXc33WUKX8R1v8Aw1R8gh1bwn3q9V3ZmG/CT+SgFcVuCLxuSP6Eo/CK/d2/uHNSl917v4qg/IBM9YpjakPi6p/Uo5TUKsD8d4l85JfV/wAkn1ln/ZZ/yqf1J9C6pg/7TWyIn2nc55kkfBQSmEo0isvFZ5KpTbXo22v3LSpSYZ/ZtI+9TqifMayPkYVRWbBIBmEnJpKKQvJNTd9Kj8L/AJf2BuKGSiOQ5RsWe/12NdiQsl6SejZqAkNk9ltSE3QOWPJd1S1QXTPF6/o28Au0HSIknG5gRO6BR4ATsF7VXtmvBBGDg43HdNtbGnT9xgHfn80tx97JSPO+E+gLnw6r+zZ/MR2HLzKkcRoU6LS1jYpiQBOY7nqt1xGrDYG5+iwvpP8A7T/I/RVlFJUWt1ZmbuiDkfBQdK7aXUtB7Z80WQchYZGqLoEG80e3pSZgfJOtwJU2nVA5JMm0jTGRMtyYyV2qJXPFEBCuLkNxzSook5EmjDcqq4i/xLmk3pH4lSmVZUPhI8S+b/G0f8R/ZPxK2/gZ8rqJ67wmnppNHZFvLVtRulwn6juE+3bDQEVdVKvkY5cmC4vwU0ycY5GN1nqllnZetvYCIIBHdVN5wCm8yPZ68x8FR40+NfsLlBPZ56yhHJddSWzuPRkj3CD54VLd8NcwwQQVjyYZLYUmUbmpharKpbFRX0lncA2RSmozmILmqlBGlcSITSVWiHKijO3RajkEFFIg+Ul2VxGiDCmJ5TCoQ4UwrrimlCiDSmFPKa5GiDHIZT3FDJViH0LPVPXCEIu0rshSsMuEpjagXKrsKUyUytvXySs1xu0L2kcoMrSOCj1qGoIyjZd7PEbaqWlzOhKk+IdwVB46zRXqgcnu+pUe3vuTvmsuXG7tEw5kvJIt/XCE88SjqoOuU15ws3Sma79C1HFyRAGUqDnEy4kyq2132U11cDnCo4+iLxruW3jhrST0RPQVhfdNd01OPyI/MLMXN6X4Gy3/AP04siGuqEe8Q0fDf/Oy1YcXSt9zFlyqcklwj0ynsE9DonCItb5FvkSSSSABIdSm12CAfNESUIVN7wVjgdIAO43+KoLvgdRudMjtn6LapKkscZcoh5hcW8KBWEL0/iHDKdYe0IP3hv8A3WE9IODPonIlp2cNj+hWfJgra2BmfqVQo7q6DeuIlVVa6KT7BtC+ui0qXCYytKoql4UmXaHsWHrRo/FCXihUHriXrndT2LD1Iv8AxAuaws/693TvXu6nsWTrRe6guSFSevd1z17up7Fk6y8MJsNVL693S9d7qexZOtFzpauaGqnF73XfWyp7Fk6kfSia9siExtUTE5RV0uBnBCy05ScJR7hshRmOTU7Vl0xrqKEaamJlQYRLUeAelzYua3/2OWbqOWm9KjNxWP77vqsxXVEjBP8AUGt75zcbo4vpVYitKXLFFl45potKd9ATHXBcoTFJojKkcUU7JLNKSqyz4TZuq1GsaMuIC9v4RZimxjG7NAH91iv+nnB9INdwycMnpzP5L0Ozb+qtHkZij3LCkiqPTrN6ooeOqjGNOx6SaHDqnIFRJLhKHqRClYVJCD0QFBojVHUKvRa9pa4Ag7goqSgDyn0z4CaDpGWOnSen7p7rz+9ZC969LLfxLaoImBq+I5heK8St4VapiMsapmdgypNGgSiCllTqBASskq4KRVkb1MoNS3VjVuwAq+rdgpUXJjGkiM+mhkIzqwKaXhPTFsFCSJqC5IVrQBkLoCfqCRcELCOYihwURxXFVxsiZ9JeKMuG5w2OfdSLS7OzusJJLQ9mxbD1HqLqXEkyJYPTfK5XMA+S6kp3CfPvHnzVqH9531WerbpJKsTBLlgHBPpriSJUkNV/6PcLNaqxg5nJ6DmV1JVkFcns9hahrWsaIDQAB5K1ptj5QupKyWjdFUEosgIsJJIMsxzAiJJKjFyBvKZKSSui6GuKkNOFxJCXAJHQU5JJUKsBWAIM7FeL+m7W0qhY0R0HZdSTIKxeXUTFuuCueslJJIlFNiE2cfUJQXLiSKSQVtWNlLUkkr9KF2KV3UuJIdKBY7UkHJJI9KJbCNITsJJJTLn/2Q==";
-        seriesList.add(narasimha);
+        /*Series goast = new Series();
+        goast.title = "Goast";
+        goast.imageUrl = "https://wallpaperaccess.com/full/1280586.jpg";
+        seriesList.add(goast);
 
-        Series arunachalam = new Series();
-        arunachalam.title = "Arunachalam";
-        arunachalam.imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3_45I2R6rCDsN27ImpCYyMLTug1v2XkltAA&usqp=CAU";
-        seriesList.add(arunachalam);
+        Series hits = new Series();
+        hits.title = "1990s Hits & Plops";
+        hits.imageUrl = "https://i.ytimg.com/vi/C2ueyddjD1M/maxresdefault.jpg";
+        seriesList.add(hits);*/
     }
 }

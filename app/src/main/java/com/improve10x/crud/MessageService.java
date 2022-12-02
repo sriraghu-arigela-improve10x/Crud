@@ -14,7 +14,7 @@ public interface MessageService {
     Call<List<Message>> fetchTask();
 
     @POST("sriraghuMessageHistory")
-    Call<Message> createTask(@Body Message message);
+    Call<Message> createMessage(@Body Message message);
 
     @DELETE("sriraghuMessageHistory/{id}")
     Call<Void> deleteMessage(@Path("id")String id);
