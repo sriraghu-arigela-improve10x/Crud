@@ -34,6 +34,24 @@ public class TemplatesActivity extends AppCompatActivity {
         templateRv();
     }
 
+    public void deleteTemplate(Template template) {
+        TemplateApi templateApi = new TemplateApi();
+        TemplateService templateService = templateApi.createTemplateService();
+        Call<Void> call = templateService.deleteTemplate(template.id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Toast.makeText(TemplatesActivity.this, "Successfully Deleted", Toast.LENGTH_SHORT).show();
+                fetchData();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(TemplatesActivity.this, "Failed to Delete", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -71,6 +89,23 @@ public class TemplatesActivity extends AppCompatActivity {
         templateRv.setLayoutManager(new LinearLayoutManager(this));
         templatesAdapter = new TemplatesAdapter();
         templatesAdapter.setData(templateList);
+        templatesAdapter.setOnItemActionListener(new OnItemActionListener() {
+            @Override
+            public void onItemClicked(Template template) {
+                Toast.makeText(TemplatesActivity.this, "On Item Clicked", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemDelete(Template template) {
+                Toast.makeText(TemplatesActivity.this, "On Item Delete", Toast.LENGTH_SHORT).show();
+                deleteTemplate(template);
+            }
+
+            @Override
+            public void onItemEdit(Template template) {
+                Toast.makeText(TemplatesActivity.this, "On Item Edit", Toast.LENGTH_SHORT).show();
+            }
+        });
         templateRv.setAdapter(templatesAdapter);
     }
 

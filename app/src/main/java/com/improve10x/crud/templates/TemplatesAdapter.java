@@ -15,6 +15,12 @@ public class TemplatesAdapter extends RecyclerView.Adapter<TemplatesViewHolder> 
 
     public List<Template> templateArrayList;
 
+    public OnItemActionListener onItemActionListener;
+
+    public void setOnItemActionListener(OnItemActionListener listener){
+        onItemActionListener = listener;
+    }
+
     public void setData(List<Template> templates) {
         templateArrayList = templates;
         notifyDataSetChanged();
@@ -31,6 +37,12 @@ public class TemplatesAdapter extends RecyclerView.Adapter<TemplatesViewHolder> 
     public void onBindViewHolder(@NonNull TemplatesViewHolder holder, int position) {
         Template template = templateArrayList.get(position);
         holder.templateTxt.setText(template.message);
+        holder.deleteBtn.setOnClickListener(view -> {
+            onItemActionListener.onItemDelete(template);
+        });
+        holder.itemView.setOnClickListener(view -> {
+            onItemActionListener.onItemClicked(template);
+        });
     }
 
     @Override
