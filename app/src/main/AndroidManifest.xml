@@ -16,22 +16,22 @@
         android:theme="@style/Theme.Crud"
         tools:targetApi="31">
         <activity
-            android:name=".AddSeriesActivity"
+            android:name=".series.AddSeriesActivity"
             android:exported="false" />
         <activity
-            android:name=".SeriesActivity"
+            android:name=".series.SeriesActivity"
             android:exported="false" />
         <activity
-            android:name=".AddTemplateActivity"
+            android:name=".templates.AddTemplateActivity"
             android:exported="false" />
         <activity
-            android:name=".TemplatesActivity"
+            android:name=".templates.TemplatesActivity"
             android:exported="false" />
         <activity
-            android:name=".AddMessageActivity"
+            android:name=".messages.AddMessageActivity"
             android:exported="false" />
         <activity
-            android:name=".MessagesActivity"
+            android:name=".messages.MessagesActivity"
             android:exported="false" />
         <activity
             android:name=".DashboardActivity"

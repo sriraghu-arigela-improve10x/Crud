@@ -1,4 +1,4 @@
-package com.improve10x.crud;
+package com.improve10x.crud.series;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.improve10x.crud.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,24 @@ public class SeriesActivity extends AppCompatActivity {
         setData();
         seriesRv();
         addSeriesActivity();
+    }
+
+    public void deleteSeries(Series series) {
+        SeriesApi seriesApi = new SeriesApi();
+        SeriesService seriesService = seriesApi.createSeriesService();
+        Call<Void> call = seriesService.deleteSeries(series.id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Toast.makeText(SeriesActivity.this, "Successfully Deleted", Toast.LENGTH_SHORT).show();
+                fetchTask();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(SeriesActivity.this, "Fail to Delete Message", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -69,6 +89,23 @@ public class SeriesActivity extends AppCompatActivity {
         seriesRv.setLayoutManager(new LinearLayoutManager(this));
         seriesAdapter = new SeriesAdapter();
         seriesAdapter.setData(seriesList);
+        seriesAdapter.setOnItemActionListener(new OnItemActionListener() {
+            @Override
+            public void onItemClicked(Series series) {
+                Toast.makeText(SeriesActivity.this, "On Item Clicked", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemDelete(Series series) {
+                Toast.makeText(SeriesActivity.this, "On Item Delete", Toast.LENGTH_SHORT).show();
+                deleteSeries(series);
+            }
+
+            @Override
+            public void onItemEdit(Series series) {
+                Toast.makeText(SeriesActivity.this, "On Item Edit", Toast.LENGTH_SHORT).show();
+            }
+        });
         seriesRv.setAdapter(seriesAdapter);
     }
 

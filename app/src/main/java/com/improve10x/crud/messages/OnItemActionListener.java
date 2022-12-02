@@ -1,4 +1,4 @@
-package com.improve10x.crud;
+package com.improve10x.crud.messages;
 
 public interface OnItemActionListener {
 

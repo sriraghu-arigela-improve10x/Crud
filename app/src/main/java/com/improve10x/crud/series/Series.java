@@ -1,10 +1,11 @@
-package com.improve10x.crud;
+package com.improve10x.crud.series;
 
 import com.google.gson.annotations.SerializedName;
 
 public class Series {
-    @SerializedName("id")
+    @SerializedName("_id")
     public String id;
+    public String seriesId;
     @SerializedName("title")
     public String title;
     @SerializedName("imageUrl")

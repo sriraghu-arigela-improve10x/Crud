@@ -1,4 +1,4 @@
-package com.improve10x.crud;
+package com.improve10x.crud.templates;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +7,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.improve10x.crud.R;
+
 import java.util.List;
 
 public class TemplatesAdapter extends RecyclerView.Adapter<TemplatesViewHolder> {
