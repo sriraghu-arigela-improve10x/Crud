@@ -24,7 +24,7 @@ public class AddMessageActivity extends AppCompatActivity {
         addBtn.setOnClickListener(view -> {
             EditText nameTxt = findViewById(R.id.name_txt);
             String name = nameTxt.getText().toString();
-            EditText phoneNumberTxt = findViewById(R.id.phone_number_btn);
+            EditText phoneNumberTxt = findViewById(R.id.phone_number_txt);
             String phoneNumber = phoneNumberTxt.getText().toString();
             EditText addMessageTxt = findViewById(R.id.add_message_txt);
             String addMessage = addMessageTxt.getText().toString();
@@ -36,11 +36,11 @@ public class AddMessageActivity extends AppCompatActivity {
         Message message1 = new Message();
         message1.title = name;
         message1.phoneNumber = phoneNumber;
-        message1.message = addMessage;
+        message1.messageTextTxt = addMessage;
 
-        MessageApi messageApi = new MessageApi();
+        MessagesApi messageApi = new MessagesApi();
         MessageService messageService = messageApi.createMessageService();
-        Call<Message> call = messageService.createMessage(message1);
+        Call<Message> call = messageService.createMessages(message1);
         call.enqueue(new Callback<Message>() {
             @Override
             public void onResponse(Call<Message> call, Response<Message> response) {

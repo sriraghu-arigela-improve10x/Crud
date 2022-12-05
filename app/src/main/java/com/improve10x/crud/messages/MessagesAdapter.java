@@ -11,13 +11,13 @@ import com.improve10x.crud.R;
 
 import java.util.List;
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
+public class MessagesAdapter extends RecyclerView.Adapter<MessageViewHolder> {
 
-    public List<Message> messageArrayList;
+    public List<Message> messageList;
     public OnItemActionListener onItemActionListener;
 
     public void setData(List<Message> messages) {
-        messageArrayList = messages;
+        messageList = messages;
         notifyDataSetChanged();
     }
 
@@ -34,7 +34,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
-        Message message = messageArrayList.get(position);
+        Message message = messageList.get(position);
         holder.titleTxt.setText(message.title);
         holder.numberTxt.setText(message.phoneNumber);
         holder.messageTxt.setText(message.messageTextTxt);
@@ -48,6 +48,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
 
     @Override
     public int getItemCount() {
-        return messageArrayList.size();
+        return messageList.size();
     }
 }

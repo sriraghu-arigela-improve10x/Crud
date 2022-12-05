@@ -21,34 +21,34 @@ import retrofit2.Response;
 public class MessagesActivity extends AppCompatActivity {
 
     public ArrayList<Message> messageList;
-    public RecyclerView messageRv;
-    public MessageAdapter messageAdapter;
+    public RecyclerView messagesRv;
+    public MessagesAdapter messagesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
         getSupportActionBar().setTitle("Messages");
-        addMessageActivity();
+        handleAdd();
         setData();
-        messageRv();
+        messagesRv();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        fetchMessage();
+        fetchMessages();
     }
 
-    public void fetchMessage() {
-        MessageApi messageApi = new MessageApi();
+    public void fetchMessages() {
+        MessagesApi messageApi = new MessagesApi();
         MessageService messageService = messageApi.createMessageService();
-        Call<List<Message>> call = messageService.fetchMessage();
+        Call<List<Message>> call = messageService.fetchMessages();
         call.enqueue(new Callback<List<Message>>() {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
                 List<Message> messages = response.body();
-                messageAdapter.setData(messages);
+                messagesAdapter.setData(messages);
             }
 
             @Override
@@ -58,15 +58,15 @@ public class MessagesActivity extends AppCompatActivity {
         });
     }
 
-    public void deleteMessage(Message message) {
-        MessageApi messageApi = new MessageApi();
+    public void deleteMessages(Message message) {
+        MessagesApi messageApi = new MessagesApi();
         MessageService messageService = messageApi.createMessageService();
-        Call<Void> call = messageService.deleteMessage(message.id);
+        Call<Void> call = messageService.deleteMessages(message.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Toast.makeText(MessagesActivity.this, "Successfully Deleted", Toast.LENGTH_SHORT).show();
-                fetchMessage();
+                fetchMessages();
             }
 
             @Override
@@ -76,7 +76,7 @@ public class MessagesActivity extends AppCompatActivity {
         });
     }
 
-    public void addMessageActivity() {
+    public void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddMessageActivity.class);
@@ -84,12 +84,12 @@ public class MessagesActivity extends AppCompatActivity {
         });
     }
 
-    public void messageRv() {
-        messageRv = findViewById(R.id.message_rv);
-        messageRv.setLayoutManager(new LinearLayoutManager(this));
-        messageAdapter = new MessageAdapter();
-        messageAdapter.setData(messageList);
-        messageAdapter.setOnItemActionListener(new OnItemActionListener() {
+    public void messagesRv() {
+        messagesRv = findViewById(R.id.messages_rv);
+        messagesRv.setLayoutManager(new LinearLayoutManager(this));
+        messagesAdapter = new MessagesAdapter();
+        messagesAdapter.setData(messageList);
+        messagesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Message message) {
                 Toast.makeText(MessagesActivity.this, "On Item Clicked", Toast.LENGTH_SHORT).show();
@@ -98,7 +98,7 @@ public class MessagesActivity extends AppCompatActivity {
             @Override
             public void onItemDelete(Message message) {
                 Toast.makeText(MessagesActivity.this, "On Item Delete", Toast.LENGTH_SHORT).show();
-                deleteMessage(message);
+                deleteMessages(message);
             }
 
             @Override
@@ -106,7 +106,7 @@ public class MessagesActivity extends AppCompatActivity {
                 Toast.makeText(MessagesActivity.this, "On Item Delete", Toast.LENGTH_SHORT).show();
             }
         });
-        messageRv.setAdapter(messageAdapter);
+        messagesRv.setAdapter(messagesAdapter);
     }
 
     public void setData() {

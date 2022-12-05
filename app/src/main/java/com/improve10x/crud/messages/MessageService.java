@@ -11,11 +11,11 @@ import retrofit2.http.Path;
 
 public interface MessageService {
     @GET("sriraghuMessageHistory")
-    Call<List<Message>> fetchMessage();
+    Call<List<Message>> fetchMessages();
 
     @POST("sriraghuMessageHistory")
-    Call<Message> createMessage(@Body Message message);
+    Call<Message> createMessages(@Body Message message);
 
     @DELETE("sriraghuMessageHistory/{id}")
-    Call<Void> deleteMessage(@Path("id")String id);
+    Call<Void> deleteMessages(@Path("id")String id);
 }
