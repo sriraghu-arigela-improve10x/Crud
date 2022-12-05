@@ -12,7 +12,7 @@ import retrofit2.http.Path;
 public interface TemplateService {
 
     @GET("sriraghuTemplates")
-    Call<List<Template>> fetchData();
+    Call<List<Template>> fetchTemplate();
 
     @POST("sriraghuTemplates")
     Call<Template> createTask(@Body Template template);

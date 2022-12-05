@@ -42,7 +42,7 @@ public class TemplatesActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Toast.makeText(TemplatesActivity.this, "Successfully Deleted", Toast.LENGTH_SHORT).show();
-                fetchData();
+                fetchTemplate();
             }
 
             @Override
@@ -55,13 +55,13 @@ public class TemplatesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        fetchData();
+        fetchTemplate();
     }
 
-    public void fetchData() {
+    public void fetchTemplate() {
         TemplateApi templateApi = new TemplateApi();
         TemplateService templateService = templateApi.createTemplateService();
-        Call<List<Template>> call = templateService.fetchData();
+        Call<List<Template>> call = templateService.fetchTemplate();
         call.enqueue(new Callback<List<Template>>() {
             @Override
             public void onResponse(Call<List<Template>> call, Response<List<Template>> response) {

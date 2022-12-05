@@ -12,7 +12,7 @@ import retrofit2.http.Path;
 public interface SeriesService {
 
     @GET("sriraghuSeries")
-    Call<List<Series>> fetchTask();
+    Call<List<Series>> fetchSeries();
 
     @POST("sriraghuSeries")
     Call<Series> createSeries(@Body Series series);

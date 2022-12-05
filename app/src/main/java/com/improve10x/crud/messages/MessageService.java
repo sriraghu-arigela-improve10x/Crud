@@ -11,7 +11,7 @@ import retrofit2.http.Path;
 
 public interface MessageService {
     @GET("sriraghuMessageHistory")
-    Call<List<Message>> fetchTask();
+    Call<List<Message>> fetchMessage();
 
     @POST("sriraghuMessageHistory")
     Call<Message> createMessage(@Body Message message);

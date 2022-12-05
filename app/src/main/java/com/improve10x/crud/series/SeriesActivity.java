@@ -42,7 +42,7 @@ public class SeriesActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Toast.makeText(SeriesActivity.this, "Successfully Deleted", Toast.LENGTH_SHORT).show();
-                fetchTask();
+                fetchSeries();
             }
 
             @Override
@@ -55,13 +55,13 @@ public class SeriesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        fetchTask();
+        fetchSeries();
     }
 
-    public void fetchTask() {
+    public void fetchSeries() {
         SeriesApi seriesApi =new SeriesApi();
         SeriesService seriesService = seriesApi.createSeriesService();
-        Call<List<Series>> call = seriesService.fetchTask();
+        Call<List<Series>> call = seriesService.fetchSeries();
         call.enqueue(new Callback<List<Series>>() {
             @Override
             public void onResponse(Call<List<Series>> call, Response<List<Series>> response) {

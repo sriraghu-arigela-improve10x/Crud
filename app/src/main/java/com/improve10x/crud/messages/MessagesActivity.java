@@ -37,13 +37,13 @@ public class MessagesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        fetchTask();
+        fetchMessage();
     }
 
-    public void fetchTask() {
+    public void fetchMessage() {
         MessageApi messageApi = new MessageApi();
         MessageService messageService = messageApi.createMessageService();
-        Call<List<Message>> call = messageService.fetchTask();
+        Call<List<Message>> call = messageService.fetchMessage();
         call.enqueue(new Callback<List<Message>>() {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
@@ -66,7 +66,7 @@ public class MessagesActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Toast.makeText(MessagesActivity.this, "Successfully Deleted", Toast.LENGTH_SHORT).show();
-                fetchTask();
+                fetchMessage();
             }
 
             @Override
