@@ -22,7 +22,7 @@ public class MoviesActivity extends AppCompatActivity {
 
     public ArrayList<Movie> movieList;
     public RecyclerView moviesRv;
-    public  MovieAdapter movieAdapter;
+    public MoviesAdapter movieAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +31,18 @@ public class MoviesActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Movies");
         addMovieActivity();
         setData();
-        movieRv();
+        moviesRv();
     }
 
     public void deleteMessage(Movie movie) {
-        MovieApi movieApi = new MovieApi();
-        MovieService movieService = movieApi.createMovieService();
+        MoviesApi movieApi = new MoviesApi();
+        MoviesService movieService = movieApi.createMovieService();
         Call<Void> call = movieService.deleteMessage(movie.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Toast.makeText(MoviesActivity.this, "SuccessFully Deleted", Toast.LENGTH_SHORT).show();
-                fetchMovie();
+                fetchMovies();
             }
 
             @Override
@@ -55,7 +55,7 @@ public class MoviesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        fetchMovie();
+        fetchMovies();
     }
 
     public void addMovieActivity() {
@@ -66,10 +66,10 @@ public class MoviesActivity extends AppCompatActivity {
         });
     }
 
-    public void fetchMovie() {
-        MovieApi movieApi = new MovieApi();
-        MovieService movieService = movieApi.createMovieService();
-        Call<List<Movie>> call = movieService.fetchMovie();
+    public void fetchMovies() {
+        MoviesApi movieApi = new MoviesApi();
+        MoviesService movieService = movieApi.createMovieService();
+        Call<List<Movie>> call = movieService.fetchMovies();
         call.enqueue(new Callback<List<Movie>>() {
             @Override
             public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
@@ -84,10 +84,10 @@ public class MoviesActivity extends AppCompatActivity {
         });
     }
 
-    public void movieRv() {
+    public void moviesRv() {
         moviesRv = findViewById(R.id.movies_rv);
         moviesRv.setLayoutManager(new GridLayoutManager(this, 2));
-        movieAdapter = new MovieAdapter();
+        movieAdapter = new MoviesAdapter();
         movieAdapter.setData(movieList);
         movieAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override

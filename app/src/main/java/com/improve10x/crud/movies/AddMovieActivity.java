@@ -44,8 +44,8 @@ public class AddMovieActivity extends AppCompatActivity {
         movie.imageUrl = imageUrl;
         movie.description = description;
 
-        MovieApi movieApi = new MovieApi();
-        MovieService movieService = movieApi.createMovieService();
+        MoviesApi movieApi = new MoviesApi();
+        MoviesService movieService = movieApi.createMovieService();
         Call<Movie> call = movieService.createMovie(movie);
         call.enqueue(new Callback<Movie>() {
             @Override
