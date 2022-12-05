@@ -115,7 +115,7 @@ public class MessagesActivity extends AppCompatActivity {
        /* Message aravind = new Message();
         aravind.title = "Aravind ";
         aravind.phoneNumber = "+91 9000540052";
-        aravind.message = "Hi, Welcome to improve 10X.";
+        aravind.messageTextTxt = "Hi, Welcome to improve 10X.";
         messageList.add(aravind);
 
         Message ramesh = new Message();
