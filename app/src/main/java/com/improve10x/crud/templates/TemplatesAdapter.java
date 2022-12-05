@@ -11,9 +11,9 @@ import com.improve10x.crud.R;
 
 import java.util.List;
 
-public class TemplatesAdapter extends RecyclerView.Adapter<TemplatesViewHolder> {
+public class TemplatesAdapter extends RecyclerView.Adapter<TemplateViewHolder> {
 
-    public List<Template> templateArrayList;
+    public List<Template> templateList;
 
     public OnItemActionListener onItemActionListener;
 
@@ -22,21 +22,21 @@ public class TemplatesAdapter extends RecyclerView.Adapter<TemplatesViewHolder> 
     }
 
     public void setData(List<Template> templates) {
-        templateArrayList = templates;
+        templateList = templates;
         notifyDataSetChanged();
     }
     @NonNull
     @Override
-    public TemplatesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TemplateViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.template_item, parent, false);
-        TemplatesViewHolder templatesViewHolder = new TemplatesViewHolder(view);
+        TemplateViewHolder templatesViewHolder = new TemplateViewHolder(view);
         return templatesViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TemplatesViewHolder holder, int position) {
-        Template template = templateArrayList.get(position);
-        holder.templateTxt.setText(template.message);
+    public void onBindViewHolder(@NonNull TemplateViewHolder holder, int position) {
+        Template template = templateList.get(position);
+        holder.templateTxt.setText(template.messageTextTxt);
         holder.deleteBtn.setOnClickListener(view -> {
             onItemActionListener.onItemDelete(template);
         });
@@ -47,6 +47,6 @@ public class TemplatesAdapter extends RecyclerView.Adapter<TemplatesViewHolder> 
 
     @Override
     public int getItemCount() {
-        return templateArrayList.size();
+        return templateList.size();
     }
 }

@@ -29,20 +29,20 @@ public class TemplatesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_templates);
         getSupportActionBar().setTitle("Templates");
-        addTemplatesActivity();
+        handleAdd();
         setData();
         templateRv();
     }
 
     public void deleteTemplate(Template template) {
-        TemplateApi templateApi = new TemplateApi();
-        TemplateService templateService = templateApi.createTemplateService();
+        TemplatesApi templateApi = new TemplatesApi();
+        TemplatesService templateService = templateApi.createTemplateService();
         Call<Void> call = templateService.deleteTemplate(template.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Toast.makeText(TemplatesActivity.this, "Successfully Deleted", Toast.LENGTH_SHORT).show();
-                fetchTemplate();
+                fetchTemplates();
             }
 
             @Override
@@ -55,13 +55,13 @@ public class TemplatesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        fetchTemplate();
+        fetchTemplates();
     }
 
-    public void fetchTemplate() {
-        TemplateApi templateApi = new TemplateApi();
-        TemplateService templateService = templateApi.createTemplateService();
-        Call<List<Template>> call = templateService.fetchTemplate();
+    public void fetchTemplates() {
+        TemplatesApi templateApi = new TemplatesApi();
+        TemplatesService templateService = templateApi.createTemplateService();
+        Call<List<Template>> call = templateService.fetchTemplates();
         call.enqueue(new Callback<List<Template>>() {
             @Override
             public void onResponse(Call<List<Template>> call, Response<List<Template>> response) {
@@ -76,7 +76,7 @@ public class TemplatesActivity extends AppCompatActivity {
         });
     }
 
-    public void addTemplatesActivity() {
+    public void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddTemplateActivity.class);

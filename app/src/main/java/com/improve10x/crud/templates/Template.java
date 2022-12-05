@@ -10,5 +10,5 @@ public class Template {
     public String title;
 
     @SerializedName("messageText")
-    public String message;
+    public String messageTextTxt;
 }

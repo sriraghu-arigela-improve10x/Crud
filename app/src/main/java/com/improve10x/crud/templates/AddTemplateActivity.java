@@ -24,17 +24,17 @@ public class AddTemplateActivity extends AppCompatActivity {
         addBtn.setOnClickListener(view -> {
             EditText templateMessageTxt = findViewById(R.id.template_message_txt);
             String templateMessage = templateMessageTxt.getText().toString();
-            createTask(templateMessage);
+            createTemplate(templateMessage);
         });
     }
 
-    public void createTask(String templateMessage) {
+    public void createTemplate(String templateMessage) {
         Template template = new Template();
-        template.message = templateMessage;
+        template.messageTextTxt = templateMessage;
 
-        TemplateApi templateApi = new TemplateApi();
-        TemplateService templateService = templateApi.createTemplateService();
-        Call<Template> call = templateService.createTask(template);
+        TemplatesApi templateApi = new TemplatesApi();
+        TemplatesService templateService = templateApi.createTemplateService();
+        Call<Template> call = templateService.createTemplate(template);
         call.enqueue(new Callback<Template>() {
             @Override
             public void onResponse(Call<Template> call, Response<Template> response) {

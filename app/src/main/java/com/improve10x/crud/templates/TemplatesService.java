@@ -9,13 +9,13 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-public interface TemplateService {
+public interface TemplatesService {
 
     @GET("sriraghuTemplates")
-    Call<List<Template>> fetchTemplate();
+    Call<List<Template>> fetchTemplates();
 
     @POST("sriraghuTemplates")
-    Call<Template> createTask(@Body Template template);
+    Call<Template> createTemplate(@Body Template template);
 
     @DELETE("sriraghuTemplates/{id}")
     Call<Void> deleteTemplate(@Path("id") String id);
