@@ -30,7 +30,7 @@ public class TemplatesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_templates);
         getSupportActionBar().setTitle("Templates");
         handleAdd();
-        setData();
+        setupData();
         templateRv();
     }
 
@@ -109,7 +109,7 @@ public class TemplatesActivity extends AppCompatActivity {
         templateRv.setAdapter(templatesAdapter);
     }
 
-    public void setData() {
+    public void setupData() {
         templateList = new ArrayList<>();
 
         /*Template welcomeMessage = new Template();
