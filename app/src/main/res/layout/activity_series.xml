@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="8dp"
-    tools:context=".series.SeriesActivity">
+    tools:context=".series.SeriesItemsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/siries_rv"

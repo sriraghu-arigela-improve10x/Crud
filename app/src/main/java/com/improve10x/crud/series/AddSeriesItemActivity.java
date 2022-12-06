@@ -13,7 +13,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddSeriesActivity extends AppCompatActivity {
+public class AddSeriesItemActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,19 +39,19 @@ public class AddSeriesActivity extends AppCompatActivity {
         series.title = seriesName;
         series.imageUrl = imageUrl;
 
-        SeriesApi seriesApi = new SeriesApi();
-        SeriesService seriesService = seriesApi.createSeriesService();
+        SeriesItemsApi seriesApi = new SeriesItemsApi();
+        SeriesItemsService seriesService = seriesApi.createSeriesService();
         Call<Series> call = seriesService.createSeries(series);
         call.enqueue(new Callback<Series>() {
             @Override
             public void onResponse(Call<Series> call, Response<Series> response) {
-                Toast.makeText(AddSeriesActivity.this, "Successfully Completed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddSeriesItemActivity.this, "Successfully Completed", Toast.LENGTH_SHORT).show();
                 finish();
             }
 
             @Override
             public void onFailure(Call<Series> call, Throwable t) {
-                Toast.makeText(AddSeriesActivity.this, "Try Again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddSeriesItemActivity.this, "Try Again", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -18,11 +18,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SeriesActivity extends AppCompatActivity {
+public class SeriesItemsActivity extends AppCompatActivity {
     //SeriesListActivity
     public ArrayList<Series> seriesList;
     public RecyclerView seriesRv;
-    public SeriesAdapter seriesAdapter;
+    public SeriesItemsAdapter seriesAdapter;
     //seriesItemsAdapter
 
     @Override
@@ -37,19 +37,19 @@ public class SeriesActivity extends AppCompatActivity {
     }
 
     public void deleteSeries(Series series) {
-        SeriesApi seriesApi = new SeriesApi();
-        SeriesService seriesService = seriesApi.createSeriesService();
+        SeriesItemsApi seriesApi = new SeriesItemsApi();
+        SeriesItemsService seriesService = seriesApi.createSeriesService();
         Call<Void> call = seriesService.deleteSeries(series.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(SeriesActivity.this, "Successfully Deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SeriesItemsActivity.this, "Successfully Deleted", Toast.LENGTH_SHORT).show();
                 fetchSeries();
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(SeriesActivity.this, "Fail to Delete Message", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SeriesItemsActivity.this, "Fail to Delete Message", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -61,8 +61,8 @@ public class SeriesActivity extends AppCompatActivity {
     }
 
     public void fetchSeries() {
-        SeriesApi seriesApi =new SeriesApi();
-        SeriesService seriesService = seriesApi.createSeriesService();
+        SeriesItemsApi seriesApi =new SeriesItemsApi();
+        SeriesItemsService seriesService = seriesApi.createSeriesService();
         Call<List<Series>> call = seriesService.fetchSeries();
         call.enqueue(new Callback<List<Series>>() {
             @Override
@@ -82,7 +82,7 @@ public class SeriesActivity extends AppCompatActivity {
         //handleAddButton
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(this, AddSeriesActivity.class);
+            Intent intent = new Intent(this, AddSeriesItemActivity.class);
             startActivity(intent);
         });
     }
@@ -92,23 +92,23 @@ public class SeriesActivity extends AppCompatActivity {
         //seriesItemsRv
         seriesRv = findViewById(R.id.siries_rv);
         seriesRv.setLayoutManager(new LinearLayoutManager(this));
-        seriesAdapter = new SeriesAdapter();
+        seriesAdapter = new SeriesItemsAdapter();
         seriesAdapter.setData(seriesList);
         seriesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Series series) {
-                Toast.makeText(SeriesActivity.this, "On Item Clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SeriesItemsActivity.this, "On Item Clicked", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onItemDelete(Series series) {
-                Toast.makeText(SeriesActivity.this, "On Item Delete", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SeriesItemsActivity.this, "On Item Delete", Toast.LENGTH_SHORT).show();
                 deleteSeries(series);
             }
 
             @Override
             public void onItemEdit(Series series) {
-                Toast.makeText(SeriesActivity.this, "On Item Edit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SeriesItemsActivity.this, "On Item Edit", Toast.LENGTH_SHORT).show();
             }
         });
         seriesRv.setAdapter(seriesAdapter);

@@ -22,10 +22,10 @@
             android:name=".movies.MoviesActivity"
             android:exported="false" />
         <activity
-            android:name=".series.AddSeriesActivity"
+            android:name=".series.AddSeriesItemActivity"
             android:exported="false" />
         <activity
-            android:name=".series.SeriesActivity"
+            android:name=".series.SeriesItemsActivity"
             android:exported="false" />
         <activity
             android:name=".templates.AddTemplateActivity"
