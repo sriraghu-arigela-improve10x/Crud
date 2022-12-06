@@ -20,6 +20,10 @@ public class AddTemplateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_template);
         getSupportActionBar().setTitle("Add Template");
+        handleAdd();
+    }
+
+    public void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             EditText templateMessageTxt = findViewById(R.id.template_message_txt);
