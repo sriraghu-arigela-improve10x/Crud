@@ -12,7 +12,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class SeriesAdapter extends RecyclerView.Adapter<SeriesViewHolder> {
+public class SeriesAdapter extends RecyclerView.Adapter<SeriesItemViewHolder> {
+    //SeriesItemsAdapter
     public List<Series> seriesList;
 
     public OnItemActionListener onItemActionListener;
@@ -22,19 +23,20 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesViewHolder> {
     }
 
     public void setData(List<Series> series1) {
+        //seriesItems
         seriesList = series1;
         notifyDataSetChanged();
     }
     @NonNull
     @Override
-    public SeriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SeriesItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.series_item, parent, false);
-        SeriesViewHolder seriesViewHolder = new SeriesViewHolder(view);
+        SeriesItemViewHolder seriesViewHolder = new SeriesItemViewHolder(view);
         return seriesViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SeriesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SeriesItemViewHolder holder, int position) {
         Series series = seriesList.get(position);
         holder.titleTxt.setText(series.title);
         if(series.imageUrl!= null&& series.imageUrl.isEmpty()== false) {

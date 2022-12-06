@@ -18,7 +18,7 @@ public class AddSeriesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_service);
+        setContentView(R.layout.activity_add_serice);
         getSupportActionBar().setTitle("Add Series");
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
@@ -34,6 +34,7 @@ public class AddSeriesActivity extends AppCompatActivity {
 
     public void createSeries(String seriesId, String seriesName, String imageUrl) {
         Series series = new Series();
+        // class name change SeriesItem
         series.seriesId = seriesId;
         series.title = seriesName;
         series.imageUrl = imageUrl;

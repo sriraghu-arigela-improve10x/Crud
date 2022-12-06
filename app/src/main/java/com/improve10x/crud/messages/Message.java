@@ -11,4 +11,5 @@ public class Message {
     public String phoneNumber;
     @SerializedName("messageText")
     public String messageTextTxt;
+    //messageText
 }

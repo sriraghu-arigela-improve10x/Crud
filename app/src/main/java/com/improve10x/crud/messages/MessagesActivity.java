@@ -31,7 +31,9 @@ public class MessagesActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Messages");
         handleAdd();
         setData();
+        //setupData
         messagesRv();
+        //setupMessagesRv
     }
 
     @Override
@@ -42,7 +44,7 @@ public class MessagesActivity extends AppCompatActivity {
 
     public void fetchMessages() {
         MessagesApi messageApi = new MessagesApi();
-        MessageService messageService = messageApi.createMessageService();
+        MessagesService messageService = messageApi.createMessageService();
         Call<List<Message>> call = messageService.fetchMessages();
         call.enqueue(new Callback<List<Message>>() {
             @Override
@@ -58,10 +60,10 @@ public class MessagesActivity extends AppCompatActivity {
         });
     }
 
-    public void deleteMessages(Message message) {
+    public void deleteMessage(Message message) {
         MessagesApi messageApi = new MessagesApi();
-        MessageService messageService = messageApi.createMessageService();
-        Call<Void> call = messageService.deleteMessages(message.id);
+        MessagesService messageService = messageApi.createMessageService();
+        Call<Void> call = messageService.deleteMessage(message.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -98,7 +100,7 @@ public class MessagesActivity extends AppCompatActivity {
             @Override
             public void onItemDelete(Message message) {
                 Toast.makeText(MessagesActivity.this, "On Item Delete", Toast.LENGTH_SHORT).show();
-                deleteMessages(message);
+                deleteMessage(message);
             }
 
             @Override

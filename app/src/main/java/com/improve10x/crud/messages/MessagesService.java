@@ -9,13 +9,13 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-public interface MessageService {
+public interface MessagesService {
     @GET("sriraghuMessageHistory")
     Call<List<Message>> fetchMessages();
 
     @POST("sriraghuMessageHistory")
-    Call<Message> createMessages(@Body Message message);
+    Call<Message> createMessage(@Body Message message);
 
     @DELETE("sriraghuMessageHistory/{id}")
-    Call<Void> deleteMessages(@Path("id")String id);
+    Call<Void> deleteMessage(@Path("id")String id);
 }

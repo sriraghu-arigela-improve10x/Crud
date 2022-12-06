@@ -19,10 +19,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SeriesActivity extends AppCompatActivity {
-
+    //SeriesListActivity
     public ArrayList<Series> seriesList;
     public RecyclerView seriesRv;
     public SeriesAdapter seriesAdapter;
+    //seriesItemsAdapter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class SeriesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_series);
         getSupportActionBar().setTitle("Series");
         setData();
+        //setupData
         seriesRv();
         addSeriesActivity();
     }
@@ -77,6 +79,7 @@ public class SeriesActivity extends AppCompatActivity {
     }
 
     public void addSeriesActivity() {
+        //handleAddButton
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddSeriesActivity.class);
@@ -85,6 +88,8 @@ public class SeriesActivity extends AppCompatActivity {
     }
 
     public void seriesRv() {
+        //setupSeriesItemsRecyclerView
+        //seriesItemsRv
         seriesRv = findViewById(R.id.siries_rv);
         seriesRv.setLayoutManager(new LinearLayoutManager(this));
         seriesAdapter = new SeriesAdapter();
