@@ -5,12 +5,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MessagesApi {
 
-    public MessagesService createMessageService() {
+    public MessageService createMessageService() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://crudcrud.com/api/479dd07f8c1d482e9219f7dcb48e25f4/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        MessagesService messageService = retrofit.create(MessagesService.class);
+        MessageService messageService = retrofit.create(MessageService.class);
         return messageService;
     }
 }

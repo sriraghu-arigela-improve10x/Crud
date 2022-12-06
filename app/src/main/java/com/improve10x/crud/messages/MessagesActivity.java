@@ -42,7 +42,7 @@ public class MessagesActivity extends AppCompatActivity {
 
     public void fetchMessages() {
         MessagesApi messageApi = new MessagesApi();
-        MessagesService messageService = messageApi.createMessageService();
+        MessageService messageService = messageApi.createMessageService();
         Call<List<Message>> call = messageService.fetchMessages();
         call.enqueue(new Callback<List<Message>>() {
             @Override
@@ -60,7 +60,7 @@ public class MessagesActivity extends AppCompatActivity {
 
     public void deleteMessage(Message message) {
         MessagesApi messageApi = new MessagesApi();
-        MessagesService messageService = messageApi.createMessageService();
+        MessageService messageService = messageApi.createMessageService();
         Call<Void> call = messageService.deleteMessage(message.id);
         call.enqueue(new Callback<Void>() {
             @Override

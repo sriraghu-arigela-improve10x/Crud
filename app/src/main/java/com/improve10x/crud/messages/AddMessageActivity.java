@@ -43,7 +43,7 @@ public class AddMessageActivity extends AppCompatActivity {
         messages.messageText = addMessage;
 
         MessagesApi messageApi = new MessagesApi();
-        MessagesService messageService = messageApi.createMessageService();
+        MessageService messageService = messageApi.createMessageService();
         Call<Message> call = messageService.createMessage(messages);
         call.enqueue(new Callback<Message>() {
             @Override

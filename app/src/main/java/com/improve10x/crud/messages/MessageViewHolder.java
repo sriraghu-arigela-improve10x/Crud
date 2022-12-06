@@ -13,7 +13,7 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
 
     public TextView titleTxt;
     public TextView numberTxt;
-    public TextView messageTxt;
+    public TextView messageTextTxt;
     //messageTextTxt
     public ImageView deleteBtn;
 
@@ -21,7 +21,7 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         titleTxt = itemView.findViewById(R.id.title_txt);
         numberTxt = itemView.findViewById(R.id.number_txt);
-        messageTxt = itemView.findViewById(R.id.message_txt);
+        messageTextTxt = itemView.findViewById(R.id.message_txt);
         deleteBtn = itemView.findViewById(R.id.delete_btn);
     }
 }
