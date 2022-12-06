@@ -36,7 +36,7 @@ public class MoviesActivity extends AppCompatActivity {
 
     public void deleteMessage(Movie movie) {
         MoviesApi movieApi = new MoviesApi();
-        MoviesService movieService = movieApi.createMovieService();
+        MoviesService movieService = movieApi.createMoviesService();
         Call<Void> call = movieService.deleteMessage(movie.id);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -68,7 +68,7 @@ public class MoviesActivity extends AppCompatActivity {
 
     public void fetchMovies() {
         MoviesApi movieApi = new MoviesApi();
-        MoviesService movieService = movieApi.createMovieService();
+        MoviesService movieService = movieApi.createMoviesService();
         Call<List<Movie>> call = movieService.fetchMovies();
         call.enqueue(new Callback<List<Movie>>() {
             @Override

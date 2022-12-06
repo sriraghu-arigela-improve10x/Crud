@@ -14,7 +14,6 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
     public TextView titleTxt;
     public TextView numberTxt;
     public TextView messageTextTxt;
-    //messageTextTxt
     public ImageView deleteBtn;
 
     public MessageViewHolder(@NonNull View itemView) {
