@@ -18,7 +18,7 @@ public class AddSeriesItemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_serice);
+        setContentView(R.layout.activity_add_series);
         getSupportActionBar().setTitle("Add Series");
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {

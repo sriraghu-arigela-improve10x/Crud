@@ -19,21 +19,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SeriesItemsActivity extends AppCompatActivity {
-    //SeriesListActivity
     public ArrayList<Series> seriesList;
-    public RecyclerView seriesRv;
-    public SeriesItemsAdapter seriesAdapter;
-    //seriesItemsAdapter
+    public RecyclerView seriesItemsRv;
+    public SeriesItemsAdapter seriesItemsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_series);
         getSupportActionBar().setTitle("Series");
-        setData();
-        //setupData
-        seriesRv();
-        addSeriesActivity();
+        setupData();
+        seriesItemsRv();
+        handleAdd();
     }
 
     public void deleteSeries(Series series) {
@@ -68,7 +65,7 @@ public class SeriesItemsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Series>> call, Response<List<Series>> response) {
                 List<Series> series = response.body();
-                seriesAdapter.setData(series);
+                seriesItemsAdapter.setData(series);
             }
 
             @Override
@@ -78,8 +75,7 @@ public class SeriesItemsActivity extends AppCompatActivity {
         });
     }
 
-    public void addSeriesActivity() {
-        //handleAddButton
+    public void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddSeriesItemActivity.class);
@@ -87,14 +83,12 @@ public class SeriesItemsActivity extends AppCompatActivity {
         });
     }
 
-    public void seriesRv() {
-        //setupSeriesItemsRecyclerView
-        //seriesItemsRv
-        seriesRv = findViewById(R.id.siries_rv);
-        seriesRv.setLayoutManager(new LinearLayoutManager(this));
-        seriesAdapter = new SeriesItemsAdapter();
-        seriesAdapter.setData(seriesList);
-        seriesAdapter.setOnItemActionListener(new OnItemActionListener() {
+    public void seriesItemsRv() {
+        seriesItemsRv = findViewById(R.id.siries_rv);
+        seriesItemsRv.setLayoutManager(new LinearLayoutManager(this));
+        seriesItemsAdapter = new SeriesItemsAdapter();
+        seriesItemsAdapter.setData(seriesList);
+        seriesItemsAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Series series) {
                 Toast.makeText(SeriesItemsActivity.this, "On Item Clicked", Toast.LENGTH_SHORT).show();
@@ -111,10 +105,10 @@ public class SeriesItemsActivity extends AppCompatActivity {
                 Toast.makeText(SeriesItemsActivity.this, "On Item Edit", Toast.LENGTH_SHORT).show();
             }
         });
-        seriesRv.setAdapter(seriesAdapter);
+        seriesItemsRv.setAdapter(seriesItemsAdapter);
     }
 
-    public void setData() {
+    public void setupData() {
         seriesList = new ArrayList<>();
 
         /*Series goast = new Series();
