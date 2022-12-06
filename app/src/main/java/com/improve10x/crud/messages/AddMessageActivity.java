@@ -40,7 +40,7 @@ public class AddMessageActivity extends AppCompatActivity {
         Message messages = new Message();
         messages.title = name;
         messages.phoneNumber = phoneNumber;
-        messages.messageTextTxt = addMessage;
+        messages.messageText = addMessage;
 
         MessagesApi messageApi = new MessagesApi();
         MessagesService messageService = messageApi.createMessageService();

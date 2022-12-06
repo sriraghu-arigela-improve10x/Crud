@@ -10,6 +10,6 @@ public class Message {
     @SerializedName("phoneNumber")
     public String phoneNumber;
     @SerializedName("messageText")
-    public String messageTextTxt;
-    //messageText
+    public String messageText;
+
 }

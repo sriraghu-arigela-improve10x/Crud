@@ -37,7 +37,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessageViewHolder> {
         Message message = messageList.get(position);
         holder.titleTxt.setText(message.title);
         holder.numberTxt.setText(message.phoneNumber);
-        holder.messageTxt.setText(message.messageTextTxt);
+        holder.messageTxt.setText(message.messageText);
         holder.deleteBtn.setOnClickListener(view -> {
             onItemActionListener.onItemDelete(message);
         });
