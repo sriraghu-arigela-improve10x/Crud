@@ -31,7 +31,7 @@ public class MoviesActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Movies");
         handleAdd();
         setupData();
-        moviesRv();
+        setupMoviesRv();
     }
 
     public void deleteMessage(Movie movie) {
@@ -84,7 +84,7 @@ public class MoviesActivity extends AppCompatActivity {
         });
     }
 
-    public void moviesRv() {
+    public void setupMoviesRv() {
         moviesRv = findViewById(R.id.movies_rv);
         moviesRv.setLayoutManager(new GridLayoutManager(this, 2));
         moviesAdapter = new MoviesAdapter();
