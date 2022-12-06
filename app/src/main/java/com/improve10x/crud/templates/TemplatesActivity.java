@@ -31,7 +31,7 @@ public class TemplatesActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Templates");
         handleAdd();
         setupData();
-        templateRv();
+        setupTemplatesRv();
     }
 
     public void deleteTemplate(Template template) {
@@ -84,7 +84,7 @@ public class TemplatesActivity extends AppCompatActivity {
         });
     }
 
-    public void templateRv() {
+    public void setupTemplatesRv() {
         templateRv = findViewById(R.id.template_rv);
         templateRv.setLayoutManager(new LinearLayoutManager(this));
         templatesAdapter = new TemplatesAdapter();
