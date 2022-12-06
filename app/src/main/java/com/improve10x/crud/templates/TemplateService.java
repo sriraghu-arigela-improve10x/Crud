@@ -9,7 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-public interface TemplatesService {
+public interface TemplateService {
 
     @GET("sriraghuTemplates")
     Call<List<Template>> fetchTemplates();

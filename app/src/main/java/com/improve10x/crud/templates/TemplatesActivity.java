@@ -36,7 +36,7 @@ public class TemplatesActivity extends AppCompatActivity {
 
     public void deleteTemplate(Template template) {
         TemplatesApi templateApi = new TemplatesApi();
-        TemplatesService templateService = templateApi.createTemplateService();
+        TemplateService templateService = templateApi.createTemplateService();
         Call<Void> call = templateService.deleteTemplate(template.id);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -60,7 +60,7 @@ public class TemplatesActivity extends AppCompatActivity {
 
     public void fetchTemplates() {
         TemplatesApi templateApi = new TemplatesApi();
-        TemplatesService templateService = templateApi.createTemplateService();
+        TemplateService templateService = templateApi.createTemplateService();
         Call<List<Template>> call = templateService.fetchTemplates();
         call.enqueue(new Callback<List<Template>>() {
             @Override
