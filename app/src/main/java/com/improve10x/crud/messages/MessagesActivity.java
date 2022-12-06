@@ -30,10 +30,8 @@ public class MessagesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_messages);
         getSupportActionBar().setTitle("Messages");
         handleAdd();
-        setData();
-        //setupData
-        messagesRv();
-        //setupMessagesRv
+        setupData();
+        setupMessagesRv();
     }
 
     @Override
@@ -86,7 +84,7 @@ public class MessagesActivity extends AppCompatActivity {
         });
     }
 
-    public void messagesRv() {
+    public void setupMessagesRv() {
         messagesRv = findViewById(R.id.messages_rv);
         messagesRv.setLayoutManager(new LinearLayoutManager(this));
         messagesAdapter = new MessagesAdapter();
@@ -111,7 +109,7 @@ public class MessagesActivity extends AppCompatActivity {
         messagesRv.setAdapter(messagesAdapter);
     }
 
-    public void setData() {
+    public void setupData() {
         messageList = new ArrayList<>();
 
        /* Message aravind = new Message();
