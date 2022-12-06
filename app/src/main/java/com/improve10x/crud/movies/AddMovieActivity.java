@@ -20,6 +20,10 @@ public class AddMovieActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_movie);
         getSupportActionBar().setTitle("Add Movie");
+        handleAdd();
+    }
+
+    public void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             EditText movieIdTxt = findViewById(R.id.movie_id_txt);
@@ -32,11 +36,11 @@ public class AddMovieActivity extends AppCompatActivity {
             String imageUrl = imageUrlTxt.getText().toString();
             EditText descriptionTxt = findViewById(R.id.description_txt);
             String description = descriptionTxt.getText().toString();
-            createMovie(movieId, movieName, series, imageUrl, description);
+            createMovies(movieId, movieName, series, imageUrl, description);
         });
     }
 
-    public void createMovie(String movieId, String movieName, String series, String imageUrl, String description) {
+    public void createMovies(String movieId, String movieName, String series, String imageUrl, String description) {
         Movie movie = new Movie();
         movie.movieId = movieId;
         movie.name = movieName;
