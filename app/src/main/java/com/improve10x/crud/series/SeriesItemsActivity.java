@@ -19,7 +19,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SeriesItemsActivity extends AppCompatActivity {
-    public ArrayList<Series> seriesList;
+    public ArrayList<SeriesItem> seriesList;
     public RecyclerView seriesItemsRv;
     public SeriesItemsAdapter seriesItemsAdapter;
 
@@ -33,9 +33,9 @@ public class SeriesItemsActivity extends AppCompatActivity {
         handleAdd();
     }
 
-    public void deleteSeries(Series series) {
+    public void deleteSeries(SeriesItem series) {
         SeriesItemsApi seriesApi = new SeriesItemsApi();
-        SeriesItemsService seriesService = seriesApi.createSeriesService();
+        SeriesItemsService seriesService = seriesApi.createSeriesItemsService();
         Call<Void> call = seriesService.deleteSeries(series.id);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -59,17 +59,17 @@ public class SeriesItemsActivity extends AppCompatActivity {
 
     public void fetchSeries() {
         SeriesItemsApi seriesApi =new SeriesItemsApi();
-        SeriesItemsService seriesService = seriesApi.createSeriesService();
-        Call<List<Series>> call = seriesService.fetchSeries();
-        call.enqueue(new Callback<List<Series>>() {
+        SeriesItemsService seriesService = seriesApi.createSeriesItemsService();
+        Call<List<SeriesItem>> call = seriesService.fetchSeries();
+        call.enqueue(new Callback<List<SeriesItem>>() {
             @Override
-            public void onResponse(Call<List<Series>> call, Response<List<Series>> response) {
-                List<Series> series = response.body();
+            public void onResponse(Call<List<SeriesItem>> call, Response<List<SeriesItem>> response) {
+                List<SeriesItem> series = response.body();
                 seriesItemsAdapter.setData(series);
             }
 
             @Override
-            public void onFailure(Call<List<Series>> call, Throwable t) {
+            public void onFailure(Call<List<SeriesItem>> call, Throwable t) {
 
             }
         });
@@ -90,18 +90,18 @@ public class SeriesItemsActivity extends AppCompatActivity {
         seriesItemsAdapter.setData(seriesList);
         seriesItemsAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
-            public void onItemClicked(Series series) {
+            public void onItemClicked(SeriesItem series) {
                 Toast.makeText(SeriesItemsActivity.this, "On Item Clicked", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onItemDelete(Series series) {
+            public void onItemDelete(SeriesItem series) {
                 Toast.makeText(SeriesItemsActivity.this, "On Item Delete", Toast.LENGTH_SHORT).show();
                 deleteSeries(series);
             }
 
             @Override
-            public void onItemEdit(Series series) {
+            public void onItemEdit(SeriesItem series) {
                 Toast.makeText(SeriesItemsActivity.this, "On Item Edit", Toast.LENGTH_SHORT).show();
             }
         });

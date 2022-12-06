@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SeriesItemsAdapter extends RecyclerView.Adapter<SeriesItemViewHolder> {
 
-    public List<Series> seriesList;
+    public List<SeriesItem> seriesList;
 
     public OnItemActionListener onItemActionListener;
 
@@ -22,7 +22,7 @@ public class SeriesItemsAdapter extends RecyclerView.Adapter<SeriesItemViewHolde
         onItemActionListener = listener;
     }
 
-    public void setData(List<Series> seriesItems) {
+    public void setData(List<SeriesItem> seriesItems) {
         seriesList = seriesItems;
         notifyDataSetChanged();
     }
@@ -36,7 +36,7 @@ public class SeriesItemsAdapter extends RecyclerView.Adapter<SeriesItemViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull SeriesItemViewHolder holder, int position) {
-        Series series = seriesList.get(position);
+        SeriesItem series = seriesList.get(position);
         holder.titleTxt.setText(series.title);
         if(series.imageUrl!= null&& series.imageUrl.isEmpty()== false) {
             Picasso.get().load(series.imageUrl).into(holder.seriesImg);
