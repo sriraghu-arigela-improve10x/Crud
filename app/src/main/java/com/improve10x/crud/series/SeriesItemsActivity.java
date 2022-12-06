@@ -29,7 +29,7 @@ public class SeriesItemsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_series);
         getSupportActionBar().setTitle("Series");
         setupData();
-        seriesItemsRv();
+        setupSeriesItemsRv();
         handleAdd();
     }
 
@@ -83,7 +83,7 @@ public class SeriesItemsActivity extends AppCompatActivity {
         });
     }
 
-    public void seriesItemsRv() {
+    public void setupSeriesItemsRv() {
         seriesItemsRv = findViewById(R.id.siries_rv);
         seriesItemsRv.setLayoutManager(new LinearLayoutManager(this));
         seriesItemsAdapter = new SeriesItemsAdapter();
