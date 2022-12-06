@@ -34,7 +34,7 @@ public class AddTemplateActivity extends AppCompatActivity {
 
     public void createTemplate(String templateMessage) {
         Template template = new Template();
-        template.messageTextTxt = templateMessage;
+        template.messageText = templateMessage;
 
         TemplatesApi templateApi = new TemplatesApi();
         TemplatesService templateService = templateApi.createTemplateService();
