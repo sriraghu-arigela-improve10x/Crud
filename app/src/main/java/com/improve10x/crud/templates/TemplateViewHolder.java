@@ -11,8 +11,8 @@ import com.improve10x.crud.R;
 
 public class TemplateViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView templateTxt;
-    public ImageButton deleteBtn;
+    TextView templateTxt;
+    ImageButton deleteBtn;
 
     public TemplateViewHolder(@NonNull View itemView) {
         super(itemView);
