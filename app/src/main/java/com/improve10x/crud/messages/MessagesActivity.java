@@ -20,9 +20,9 @@ import retrofit2.Response;
 
 public class MessagesActivity extends AppCompatActivity {
 
-    public ArrayList<Message> messageList;
-    public RecyclerView messagesRv;
-    public MessagesAdapter messagesAdapter;
+    private ArrayList<Message> messageList;
+    private RecyclerView messagesRv;
+    private MessagesAdapter messagesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class MessagesActivity extends AppCompatActivity {
         fetchMessages();
     }
 
-    public void fetchMessages() {
+    private void fetchMessages() {
         MessagesApi messageApi = new MessagesApi();
         MessageService messageService = messageApi.createMessageService();
         Call<List<Message>> call = messageService.fetchMessages();
@@ -58,7 +58,7 @@ public class MessagesActivity extends AppCompatActivity {
         });
     }
 
-    public void deleteMessage(Message message) {
+    private void deleteMessage(Message message) {
         MessagesApi messageApi = new MessagesApi();
         MessageService messageService = messageApi.createMessageService();
         Call<Void> call = messageService.deleteMessage(message.id);
@@ -76,7 +76,7 @@ public class MessagesActivity extends AppCompatActivity {
         });
     }
 
-    public void handleAdd() {
+    private void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddMessageActivity.class);
@@ -84,7 +84,7 @@ public class MessagesActivity extends AppCompatActivity {
         });
     }
 
-    public void setupMessagesRv() {
+    private void setupMessagesRv() {
         messagesRv = findViewById(R.id.messages_rv);
         messagesRv.setLayoutManager(new LinearLayoutManager(this));
         messagesAdapter = new MessagesAdapter();
@@ -109,7 +109,7 @@ public class MessagesActivity extends AppCompatActivity {
         messagesRv.setAdapter(messagesAdapter);
     }
 
-    public void setupData() {
+    private void setupData() {
         messageList = new ArrayList<>();
 
        /* Message aravind = new Message();

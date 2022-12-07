@@ -1,5 +1,7 @@
 package com.improve10x.crud.series;
 
+import com.improve10x.crud.Constants;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -11,12 +13,12 @@ import retrofit2.http.Path;
 
 public interface SeriesItemsService {
 
-    @GET("sriraghuSeries")
+    @GET(Constants.SERIES_END_POINT)
     Call<List<SeriesItem>> fetchSeries();
 
-    @POST("sriraghuSeries")
+    @POST(Constants.SERIES_END_POINT)
     Call<SeriesItem> createSeries(@Body SeriesItem series);
 
-    @DELETE("sriraghuSeries/{id}")
+    @DELETE(Constants.SERIES_END_POINT + "/{id}")
     Call<Void> deleteSeries(@Path("id") String id);
 }

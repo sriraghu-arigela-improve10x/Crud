@@ -1,5 +1,7 @@
 package com.improve10x.crud.templates;
 
+import com.improve10x.crud.Constants;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -11,12 +13,12 @@ import retrofit2.http.Path;
 
 public interface TemplateService {
 
-    @GET("sriraghuTemplates")
+    @GET(Constants.TEMPLATES_END_POINT)
     Call<List<Template>> fetchTemplates();
 
-    @POST("sriraghuTemplates")
+    @POST(Constants.TEMPLATES_END_POINT)
     Call<Template> createTemplate(@Body Template template);
 
-    @DELETE("sriraghuTemplates/{id}")
+    @DELETE(Constants.TEMPLATES_END_POINT + "/{id}")
     Call<Void> deleteTemplate(@Path("id") String id);
 }
