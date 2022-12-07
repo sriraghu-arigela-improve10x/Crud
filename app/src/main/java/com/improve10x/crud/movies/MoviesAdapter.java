@@ -14,15 +14,13 @@ import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
-    public List<Movie> movieList;
+    private List<Movie> movieList;
 
-    public OnItemActionListener onItemActionListener;
+    private OnItemActionListener onItemActionListener;
 
     public void setOnItemActionListener(OnItemActionListener listener) {
         onItemActionListener = listener;
     }
-
-
 
     public void setData(List<Movie> movies) {
         movieList = movies;
