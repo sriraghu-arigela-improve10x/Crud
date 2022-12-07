@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class Template {
     @SerializedName("_id")
-    public String id;
+    String id;
 
     @SerializedName("title")
-    public String title;
+    String title;
 
     @SerializedName("messageText")
-    public String messageText;
+    String messageText;
 }
