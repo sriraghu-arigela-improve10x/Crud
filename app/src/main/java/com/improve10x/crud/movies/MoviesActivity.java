@@ -20,9 +20,9 @@ import retrofit2.Response;
 
 public class MoviesActivity extends AppCompatActivity {
 
-    public ArrayList<Movie> movieList;
-    public RecyclerView moviesRv;
-    public MoviesAdapter moviesAdapter;
+    private ArrayList<Movie> movieList;
+    private RecyclerView moviesRv;
+    private MoviesAdapter moviesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class MoviesActivity extends AppCompatActivity {
         setupMoviesRv();
     }
 
-    public void deleteMessage(Movie movie) {
+    private void deleteMessage(Movie movie) {
         MoviesApi movieApi = new MoviesApi();
         MoviesService movieService = movieApi.createMoviesService();
         Call<Void> call = movieService.deleteMessage(movie.id);
@@ -58,7 +58,7 @@ public class MoviesActivity extends AppCompatActivity {
         fetchMovies();
     }
 
-    public void handleAdd() {
+    private void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddMovieActivity.class);
@@ -66,7 +66,7 @@ public class MoviesActivity extends AppCompatActivity {
         });
     }
 
-    public void fetchMovies() {
+    private void fetchMovies() {
         MoviesApi movieApi = new MoviesApi();
         MoviesService movieService = movieApi.createMoviesService();
         Call<List<Movie>> call = movieService.fetchMovies();
@@ -84,7 +84,7 @@ public class MoviesActivity extends AppCompatActivity {
         });
     }
 
-    public void setupMoviesRv() {
+    private void setupMoviesRv() {
         moviesRv = findViewById(R.id.movies_rv);
         moviesRv.setLayoutManager(new GridLayoutManager(this, 2));
         moviesAdapter = new MoviesAdapter();
@@ -109,7 +109,7 @@ public class MoviesActivity extends AppCompatActivity {
         moviesRv.setAdapter(moviesAdapter);
     }
 
-    public void setupData() {
+    private void setupData() {
         movieList = new ArrayList<>();
 
        /* Movie major = new Movie();
