@@ -16,7 +16,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     private List<Message> messageList;
     private OnItemActionListener onItemActionListener;
 
-    public void setData(List<Message> messages) {
+    void setData(List<Message> messages) {
         messageList = messages;
         notifyDataSetChanged();
     }
