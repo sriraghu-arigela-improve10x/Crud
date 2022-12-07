@@ -19,9 +19,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SeriesItemsActivity extends AppCompatActivity {
-    public ArrayList<SeriesItem> seriesList;
-    public RecyclerView seriesItemsRv;
-    public SeriesItemsAdapter seriesItemsAdapter;
+    private ArrayList<SeriesItem> seriesList;
+    private RecyclerView seriesItemsRv;
+    private SeriesItemsAdapter seriesItemsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class SeriesItemsActivity extends AppCompatActivity {
         handleAdd();
     }
 
-    public void deleteSeries(SeriesItem series) {
+    private void deleteSeries(SeriesItem series) {
         SeriesItemsApi seriesApi = new SeriesItemsApi();
         SeriesItemsService seriesService = seriesApi.createSeriesItemsService();
         Call<Void> call = seriesService.deleteSeries(series.id);
@@ -57,7 +57,7 @@ public class SeriesItemsActivity extends AppCompatActivity {
         fetchSeries();
     }
 
-    public void fetchSeries() {
+    private void fetchSeries() {
         SeriesItemsApi seriesApi =new SeriesItemsApi();
         SeriesItemsService seriesService = seriesApi.createSeriesItemsService();
         Call<List<SeriesItem>> call = seriesService.fetchSeries();
@@ -75,7 +75,7 @@ public class SeriesItemsActivity extends AppCompatActivity {
         });
     }
 
-    public void handleAdd() {
+    private void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddSeriesItemActivity.class);
@@ -83,7 +83,7 @@ public class SeriesItemsActivity extends AppCompatActivity {
         });
     }
 
-    public void setupSeriesItemsRv() {
+    private void setupSeriesItemsRv() {
         seriesItemsRv = findViewById(R.id.siries_rv);
         seriesItemsRv.setLayoutManager(new LinearLayoutManager(this));
         seriesItemsAdapter = new SeriesItemsAdapter();
@@ -108,7 +108,7 @@ public class SeriesItemsActivity extends AppCompatActivity {
         seriesItemsRv.setAdapter(seriesItemsAdapter);
     }
 
-    public void setupData() {
+    private void setupData() {
         seriesList = new ArrayList<>();
 
         /*Series goast = new Series();
