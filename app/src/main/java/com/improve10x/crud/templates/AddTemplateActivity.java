@@ -23,7 +23,7 @@ public class AddTemplateActivity extends AppCompatActivity {
         handleAdd();
     }
 
-    public void handleAdd() {
+    private void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             EditText templateMessageTxt = findViewById(R.id.template_message_txt);
@@ -32,7 +32,7 @@ public class AddTemplateActivity extends AppCompatActivity {
         });
     }
 
-    public void createTemplate(String templateMessage) {
+    private void createTemplate(String templateMessage) {
         Template template = new Template();
         template.messageText = templateMessage;
 
