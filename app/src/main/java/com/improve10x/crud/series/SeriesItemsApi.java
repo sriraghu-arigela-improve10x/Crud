@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SeriesItemsApi {
 
-    public SeriesItemsService createSeriesItemsService() {
+    SeriesItemsService createSeriesItemsService() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
