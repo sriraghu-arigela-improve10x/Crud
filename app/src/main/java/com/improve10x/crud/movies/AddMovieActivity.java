@@ -23,7 +23,7 @@ public class AddMovieActivity extends AppCompatActivity {
         handleAdd();
     }
 
-    public void handleAdd() {
+    private void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             EditText movieIdTxt = findViewById(R.id.movie_id_txt);
@@ -40,7 +40,7 @@ public class AddMovieActivity extends AppCompatActivity {
         });
     }
 
-    public void createMovies(String movieId, String movieName, String series, String imageUrl, String description) {
+    private void createMovies(String movieId, String movieName, String series, String imageUrl, String description) {
         Movie movie = new Movie();
         movie.movieId = movieId;
         movie.name = movieName;
