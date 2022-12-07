@@ -23,7 +23,7 @@ public class AddSeriesItemActivity extends AppCompatActivity {
         handleAdd();
     }
 
-    public void handleAdd() {
+    private void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             EditText seriesIdTxt = findViewById(R.id.seriesid_txt);
@@ -36,7 +36,7 @@ public class AddSeriesItemActivity extends AppCompatActivity {
         });
     }
 
-    public void createSeriesItems(String seriesId, String seriesName, String imageUrl) {
+    private void createSeriesItems(String seriesId, String seriesName, String imageUrl) {
         SeriesItem series = new SeriesItem();
         series.seriesId = seriesId;
         series.title = seriesName;
