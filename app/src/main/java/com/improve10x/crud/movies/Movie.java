@@ -4,18 +4,18 @@ import com.google.gson.annotations.SerializedName;
 
 public class Movie {
     @SerializedName("_id")
-    public String id;
-    public String movieId;
+    String id;
+    String movieId;
 
     @SerializedName("name")
-    public String name;
+    String name;
 
     @SerializedName("seriesId")
-    public String movieSeriesId;
+    String movieSeriesId;
 
     @SerializedName("imageUrl")
-    public String imageUrl;
+    String imageUrl;
 
     @SerializedName("description")
-    public String description;
+    String description;
 }
