@@ -20,9 +20,9 @@ import retrofit2.Response;
 
 public class TemplatesActivity extends AppCompatActivity {
 
-    public ArrayList<Template> templateList;
-    public RecyclerView templateRv;
-    public TemplatesAdapter templatesAdapter;
+    private ArrayList<Template> templateList;
+    private RecyclerView templateRv;
+    private TemplatesAdapter templatesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class TemplatesActivity extends AppCompatActivity {
         setupTemplatesRv();
     }
 
-    public void deleteTemplate(Template template) {
+    private void deleteTemplate(Template template) {
         TemplatesApi templateApi = new TemplatesApi();
         TemplateService templateService = templateApi.createTemplateService();
         Call<Void> call = templateService.deleteTemplate(template.id);
@@ -58,7 +58,7 @@ public class TemplatesActivity extends AppCompatActivity {
         fetchTemplates();
     }
 
-    public void fetchTemplates() {
+    private void fetchTemplates() {
         TemplatesApi templateApi = new TemplatesApi();
         TemplateService templateService = templateApi.createTemplateService();
         Call<List<Template>> call = templateService.fetchTemplates();
@@ -76,7 +76,7 @@ public class TemplatesActivity extends AppCompatActivity {
         });
     }
 
-    public void handleAdd() {
+    private void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddTemplateActivity.class);
@@ -84,7 +84,7 @@ public class TemplatesActivity extends AppCompatActivity {
         });
     }
 
-    public void setupTemplatesRv() {
+    private void setupTemplatesRv() {
         templateRv = findViewById(R.id.template_rv);
         templateRv.setLayoutManager(new LinearLayoutManager(this));
         templatesAdapter = new TemplatesAdapter();
@@ -109,7 +109,7 @@ public class TemplatesActivity extends AppCompatActivity {
         templateRv.setAdapter(templatesAdapter);
     }
 
-    public void setupData() {
+    private void setupData() {
         templateList = new ArrayList<>();
 
         /*Template welcomeMessage = new Template();
