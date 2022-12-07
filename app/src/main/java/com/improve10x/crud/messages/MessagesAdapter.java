@@ -13,8 +13,8 @@ import java.util.List;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessageViewHolder> {
 
-    public List<Message> messageList;
-    public OnItemActionListener onItemActionListener;
+    private List<Message> messageList;
+    private OnItemActionListener onItemActionListener;
 
     public void setData(List<Message> messages) {
         messageList = messages;
