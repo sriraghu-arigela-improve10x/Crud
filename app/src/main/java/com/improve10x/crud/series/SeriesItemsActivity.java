@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class SeriesItemsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_series);
+        Log.i("SeriesItemsActivity", "onCreate Call");
         getSupportActionBar().setTitle("Series");
         setupData();
         setupSeriesItemsRv();
@@ -54,6 +56,7 @@ public class SeriesItemsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.i("SeriesItemsActivity", "onResume Call");
         fetchSeries();
     }
 

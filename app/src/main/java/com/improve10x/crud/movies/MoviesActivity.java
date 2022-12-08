@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class MoviesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies);
+        Log.i("MoviesActivity", "onCreate Call");
         getSupportActionBar().setTitle("Movies");
         handleAdd();
         setupData();
@@ -55,6 +57,7 @@ public class MoviesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.i("MoviesActivity", "onResume Call");
         fetchMovies();
     }
 
