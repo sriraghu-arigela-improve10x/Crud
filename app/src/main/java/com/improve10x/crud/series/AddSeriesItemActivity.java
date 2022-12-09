@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.improve10x.crud.R;
+import com.improve10x.crud.api.CrudApi;
+import com.improve10x.crud.api.CrudService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,9 +44,9 @@ public class AddSeriesItemActivity extends AppCompatActivity {
         series.title = seriesName;
         series.imageUrl = imageUrl;
 
-        SeriesItemsApi seriesApi = new SeriesItemsApi();
-        SeriesItemsService seriesService = seriesApi.createSeriesItemsService();
-        Call<SeriesItem> call = seriesService.createSeries(series);
+        CrudApi crudApi = new CrudApi();
+        CrudService crudService = crudApi.createCrudService();
+        Call<SeriesItem> call = crudService.createSeries(series);
         call.enqueue(new Callback<SeriesItem>() {
             @Override
             public void onResponse(Call<SeriesItem> call, Response<SeriesItem> response) {
