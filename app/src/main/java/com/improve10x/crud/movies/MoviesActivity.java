@@ -36,10 +36,10 @@ public class MoviesActivity extends AppCompatActivity {
         setupMoviesRv();
     }
 
-    private void deleteMessage(Movie movie) {
+    private void deleteMovie(Movie movie) {
         MoviesApi movieApi = new MoviesApi();
         MoviesService movieService = movieApi.createMoviesService();
-        Call<Void> call = movieService.deleteMessage(movie.id);
+        Call<Void> call = movieService.deleteMovie(movie.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -101,7 +101,7 @@ public class MoviesActivity extends AppCompatActivity {
             @Override
             public void onItemDeleted(Movie movie) {
                 Toast.makeText(MoviesActivity.this, "On Item Delete", Toast.LENGTH_SHORT).show();
-                deleteMessage(movie);
+                deleteMovie(movie);
             }
 
             @Override

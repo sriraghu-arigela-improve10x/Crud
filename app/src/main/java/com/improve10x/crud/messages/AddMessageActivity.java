@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.improve10x.crud.R;
+import com.improve10x.crud.api.CrudApi;
+import com.improve10x.crud.api.CrudService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,9 +44,9 @@ public class AddMessageActivity extends AppCompatActivity {
         messages.phoneNumber = phoneNumber;
         messages.messageText = addMessage;
 
-        MessagesApi messageApi = new MessagesApi();
-        MessageService messageService = messageApi.createMessageService();
-        Call<Message> call = messageService.createMessage(messages);
+        CrudApi crudApi = new CrudApi();
+        CrudService crudService = crudApi.createCrudService();
+        Call<Message> call = crudService.createMessage(messages);
         call.enqueue(new Callback<Message>() {
             @Override
             public void onResponse(Call<Message> call, Response<Message> response) {

@@ -1,18 +1,18 @@
-package com.improve10x.crud.messages;
+package com.improve10x.crud.api;
 
 import com.improve10x.crud.Constants;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MessagesApi {
+public class CrudApi {
 
-    MessageService createMessageService() {
+    public CrudService createCrudService() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        MessageService messageService = retrofit.create(MessageService.class);
-        return messageService;
+        CrudService crudService = retrofit.create(CrudService.class);
+        return crudService;
     }
 }

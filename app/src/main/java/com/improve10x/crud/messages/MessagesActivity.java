@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.improve10x.crud.R;
+import com.improve10x.crud.api.CrudApi;
+import com.improve10x.crud.api.CrudService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,9 +46,9 @@ public class MessagesActivity extends AppCompatActivity {
     }
 
     private void fetchMessages() {
-        MessagesApi messageApi = new MessagesApi();
-        MessageService messageService = messageApi.createMessageService();
-        Call<List<Message>> call = messageService.fetchMessages();
+        CrudApi crudApi = new CrudApi();
+        CrudService crudService = crudApi.createCrudService();
+        Call<List<Message>> call = crudService.fetchMessages();
         call.enqueue(new Callback<List<Message>>() {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
@@ -62,9 +64,9 @@ public class MessagesActivity extends AppCompatActivity {
     }
 
     private void deleteMessage(Message message) {
-        MessagesApi messageApi = new MessagesApi();
-        MessageService messageService = messageApi.createMessageService();
-        Call<Void> call = messageService.deleteMessage(message.id);
+       CrudApi crudApi = new CrudApi();
+       CrudService crudService = crudApi.createCrudService();
+        Call<Void> call = crudService.deleteMessage(message.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

@@ -20,5 +20,5 @@ public interface MoviesService {
     Call<Movie> createMovie(@Body Movie movie);
 
     @DELETE(Constants.MOVIES_END_POINT + "/{id}")
-    Call<Void> deleteMessage(@Path("id") String id);
+    Call<Void> deleteMovie(@Path("id") String id);
 }
