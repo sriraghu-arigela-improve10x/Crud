@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.improve10x.crud.R;
+import com.improve10x.crud.api.CrudApi;
+import com.improve10x.crud.api.CrudService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,9 +50,9 @@ public class AddMovieActivity extends AppCompatActivity {
         movie.imageUrl = imageUrl;
         movie.description = description;
 
-        MoviesApi movieApi = new MoviesApi();
-        MoviesService movieService = movieApi.createMoviesService();
-        Call<Movie> call = movieService.createMovie(movie);
+        CrudApi crudApi = new CrudApi();
+        CrudService crudService = crudApi.createCrudService();
+        Call<Movie> call = crudService.createMovie(movie);
         call.enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(Call<Movie> call, Response<Movie> response) {

@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.improve10x.crud.R;
+import com.improve10x.crud.api.CrudApi;
+import com.improve10x.crud.api.CrudService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +39,9 @@ public class MoviesActivity extends AppCompatActivity {
     }
 
     private void deleteMovie(Movie movie) {
-        MoviesApi movieApi = new MoviesApi();
-        MoviesService movieService = movieApi.createMoviesService();
-        Call<Void> call = movieService.deleteMovie(movie.id);
+        CrudApi crudApi = new CrudApi();
+        CrudService crudService = crudApi.createCrudService();
+        Call<Void> call = crudService.deleteMovie(movie.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -70,9 +72,9 @@ public class MoviesActivity extends AppCompatActivity {
     }
 
     private void fetchMovies() {
-        MoviesApi movieApi = new MoviesApi();
-        MoviesService movieService = movieApi.createMoviesService();
-        Call<List<Movie>> call = movieService.fetchMovies();
+        CrudApi crudApi = new CrudApi();
+        CrudService crudService = crudApi.createCrudService();
+        Call<List<Movie>> call = crudService.fetchMovies();
         call.enqueue(new Callback<List<Movie>>() {
             @Override
             public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
