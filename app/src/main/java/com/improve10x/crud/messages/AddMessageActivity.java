@@ -17,12 +17,14 @@ import retrofit2.Response;
 
 public class AddMessageActivity extends AppCompatActivity {
 
+    private CrudService crudService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_message);
         getSupportActionBar().setTitle("Add Message");
         handleAdd();
+        setupApiService();
     }
 
     private void handleAdd() {
@@ -38,14 +40,17 @@ public class AddMessageActivity extends AppCompatActivity {
         });
     }
 
+    private void setupApiService() {
+        CrudApi crudApi = new CrudApi();
+        crudService = crudApi.createCrudService();
+    }
+
     private void createMessage(String name, String phoneNumber, String addMessage) {
         Message messages = new Message();
         messages.title = name;
         messages.phoneNumber = phoneNumber;
         messages.messageText = addMessage;
 
-        CrudApi crudApi = new CrudApi();
-        CrudService crudService = crudApi.createCrudService();
         Call<Message> call = crudService.createMessage(messages);
         call.enqueue(new Callback<Message>() {
             @Override

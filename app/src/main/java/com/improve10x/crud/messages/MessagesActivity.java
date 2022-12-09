@@ -23,6 +23,7 @@ import retrofit2.Response;
 
 public class MessagesActivity extends AppCompatActivity {
 
+    private CrudService crudService;
     private ArrayList<Message> messageList;
     private RecyclerView messagesRv;
     private MessagesAdapter messagesAdapter;
@@ -31,23 +32,35 @@ public class MessagesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
-        Log.i("MessagesActivity", "onCreate Call" );
         getSupportActionBar().setTitle("Messages");
         handleAdd();
         setupData();
+        setupApiService();
+        log("onCreate");
         setupMessagesRv();
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void log(String message) {
+        Log.i("MessagesActivity", message);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i("MessagesActivity", "onResume Call" );
+        log("onResume");
         fetchMessages();
     }
 
-    private void fetchMessages() {
+    private void setupApiService() {
         CrudApi crudApi = new CrudApi();
-        CrudService crudService = crudApi.createCrudService();
+        crudService = crudApi.createCrudService();
+    }
+
+    private void fetchMessages() {
         Call<List<Message>> call = crudService.fetchMessages();
         call.enqueue(new Callback<List<Message>>() {
             @Override
@@ -58,25 +71,23 @@ public class MessagesActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Message>> call, Throwable t) {
-                Toast.makeText(MessagesActivity.this, "Message", Toast.LENGTH_SHORT).show();
+                showToast("Message");
             }
         });
     }
 
     private void deleteMessage(Message message) {
-       CrudApi crudApi = new CrudApi();
-       CrudService crudService = crudApi.createCrudService();
         Call<Void> call = crudService.deleteMessage(message.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(MessagesActivity.this, "Successfully Deleted", Toast.LENGTH_SHORT).show();
+                showToast("Successfully Deleted");
                 fetchMessages();
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(MessagesActivity.this, "Fail to delete Message", Toast.LENGTH_SHORT).show();
+               showToast("Fail to delete Message");
             }
         });
     }
@@ -97,18 +108,18 @@ public class MessagesActivity extends AppCompatActivity {
         messagesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Message message) {
-                Toast.makeText(MessagesActivity.this, "On Item Clicked", Toast.LENGTH_SHORT).show();
+                showToast("On Item Clicked");
             }
 
             @Override
             public void onItemDelete(Message message) {
-                Toast.makeText(MessagesActivity.this, "On Item Delete", Toast.LENGTH_SHORT).show();
+                showToast("On Item Delete");
                 deleteMessage(message);
             }
 
             @Override
             public void onItemEdit(Message message) {
-                Toast.makeText(MessagesActivity.this, "On Item Delete", Toast.LENGTH_SHORT).show();
+                showToast("On Item Edit");
             }
         });
         messagesRv.setAdapter(messagesAdapter);
