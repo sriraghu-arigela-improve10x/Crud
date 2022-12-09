@@ -36,8 +36,8 @@ public class AddTemplateActivity extends AppCompatActivity {
         });
     }
 
-    private void showToast(String template) {
-        Toast.makeText(this, template, Toast.LENGTH_SHORT).show();
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void setupAPiService() {

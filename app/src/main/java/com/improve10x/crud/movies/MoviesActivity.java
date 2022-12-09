@@ -23,6 +23,7 @@ import retrofit2.Response;
 
 public class MoviesActivity extends AppCompatActivity {
 
+    private CrudService crudService;
     private ArrayList<Movie> movieList;
     private RecyclerView moviesRv;
     private MoviesAdapter moviesAdapter;
@@ -31,27 +32,39 @@ public class MoviesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies);
-        Log.i("MoviesActivity", "onCreate Call");
         getSupportActionBar().setTitle("Movies");
         handleAdd();
         setupData();
+        setupApiService();
+        log("onCreate");
         setupMoviesRv();
     }
 
-    private void deleteMovie(Movie movie) {
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void log(String message) {
+        Log.i("MoviesActivity", message);
+    }
+
+    private void setupApiService() {
         CrudApi crudApi = new CrudApi();
-        CrudService crudService = crudApi.createCrudService();
+        crudService = crudApi.createCrudService();
+    }
+
+    private void deleteMovie(Movie movie) {
         Call<Void> call = crudService.deleteMovie(movie.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(MoviesActivity.this, "SuccessFully Deleted", Toast.LENGTH_SHORT).show();
+                showToast("SuccessFully Deleted");
                 fetchMovies();
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(MoviesActivity.this, "Failed On Item Delete", Toast.LENGTH_SHORT).show();
+                showToast("Failed On Item Delete");
             }
         });
     }
@@ -59,7 +72,7 @@ public class MoviesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i("MoviesActivity", "onResume Call");
+        log("onResume");
         fetchMovies();
     }
 
@@ -72,8 +85,6 @@ public class MoviesActivity extends AppCompatActivity {
     }
 
     private void fetchMovies() {
-        CrudApi crudApi = new CrudApi();
-        CrudService crudService = crudApi.createCrudService();
         Call<List<Movie>> call = crudService.fetchMovies();
         call.enqueue(new Callback<List<Movie>>() {
             @Override
@@ -84,7 +95,7 @@ public class MoviesActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Movie>> call, Throwable t) {
-                Toast.makeText(MoviesActivity.this, "Try Again", Toast.LENGTH_SHORT).show();
+                showToast("Try Again");
             }
         });
     }
@@ -97,18 +108,18 @@ public class MoviesActivity extends AppCompatActivity {
         moviesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Movie movie) {
-                Toast.makeText(MoviesActivity.this, "On Item Clicked", Toast.LENGTH_SHORT).show();
+                showToast("On Item Clicked");
             }
 
             @Override
             public void onItemDeleted(Movie movie) {
-                Toast.makeText(MoviesActivity.this, "On Item Delete", Toast.LENGTH_SHORT).show();
+               showToast("On Item Delete");
                 deleteMovie(movie);
             }
 
             @Override
             public void onItemEdit(Movie movie) {
-                Toast.makeText(MoviesActivity.this, "On Item Edit", Toast.LENGTH_SHORT).show();
+                showToast("On Item Edit");
             }
         });
         moviesRv.setAdapter(moviesAdapter);

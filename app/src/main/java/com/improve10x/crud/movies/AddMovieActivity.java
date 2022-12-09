@@ -17,12 +17,15 @@ import retrofit2.Response;
 
 public class AddMovieActivity extends AppCompatActivity {
 
+    private CrudService crudService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_movie);
         getSupportActionBar().setTitle("Add Movie");
         handleAdd();
+        setupApiService();
     }
 
     private void handleAdd() {
@@ -42,6 +45,15 @@ public class AddMovieActivity extends AppCompatActivity {
         });
     }
 
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setupApiService() {
+        CrudApi crudApi = new CrudApi();
+        crudService = crudApi.createCrudService();
+    }
+
     private void createMovies(String movieId, String movieName, String series, String imageUrl, String description) {
         Movie movie = new Movie();
         movie.movieId = movieId;
@@ -50,19 +62,17 @@ public class AddMovieActivity extends AppCompatActivity {
         movie.imageUrl = imageUrl;
         movie.description = description;
 
-        CrudApi crudApi = new CrudApi();
-        CrudService crudService = crudApi.createCrudService();
         Call<Movie> call = crudService.createMovie(movie);
         call.enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(Call<Movie> call, Response<Movie> response) {
-                Toast.makeText(AddMovieActivity.this, "SuccessFully", Toast.LENGTH_SHORT).show();
+                showToast("SuccessFully");
                 finish();
             }
 
             @Override
             public void onFailure(Call<Movie> call, Throwable t) {
-                Toast.makeText(AddMovieActivity.this, "Try Again", Toast.LENGTH_SHORT).show();
+                showToast("Try Again");
             }
         });
     }

@@ -41,12 +41,12 @@ public class TemplatesActivity extends AppCompatActivity {
         setupTemplatesRv();
     }
 
-    private void showToast(String template) {
-        Toast.makeText(this, template, Toast.LENGTH_SHORT).show();
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    private void log(String template) {
-        Log.i("TemplatesActivity", template);
+    private void log(String message) {
+        Log.i("TemplatesActivity", message);
     }
 
     private void setupApiService() {
