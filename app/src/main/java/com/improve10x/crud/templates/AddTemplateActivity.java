@@ -17,12 +17,14 @@ import retrofit2.Response;
 
 public class AddTemplateActivity extends AppCompatActivity {
 
+    private CrudService crudService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_template);
         getSupportActionBar().setTitle("Add Template");
         handleAdd();
+        setupAPiService();
     }
 
     private void handleAdd() {
@@ -34,23 +36,30 @@ public class AddTemplateActivity extends AppCompatActivity {
         });
     }
 
+    private void showToast(String template) {
+        Toast.makeText(this, template, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setupAPiService() {
+        CrudApi crudApi = new CrudApi();
+        crudService = crudApi.createCrudService();
+    }
+
     private void createTemplate(String templateMessage) {
         Template template = new Template();
         template.messageText = templateMessage;
 
-        CrudApi crudApi = new CrudApi();
-        CrudService crudService = crudApi.createCrudService();
         Call<Template> call = crudService.createTemplate(template);
         call.enqueue(new Callback<Template>() {
             @Override
             public void onResponse(Call<Template> call, Response<Template> response) {
-                Toast.makeText(AddTemplateActivity.this, "Successfully", Toast.LENGTH_SHORT).show();
+                showToast("Successfully");
                 finish();
             }
 
             @Override
             public void onFailure(Call<Template> call, Throwable t) {
-                Toast.makeText(AddTemplateActivity.this, "Try again", Toast.LENGTH_SHORT).show();
+               showToast("Try again");
             }
         });
     }

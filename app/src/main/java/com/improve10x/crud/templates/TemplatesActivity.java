@@ -23,6 +23,8 @@ import retrofit2.Response;
 
 public class TemplatesActivity extends AppCompatActivity {
 
+    private CrudService crudService;
+
     private ArrayList<Template> templateList;
     private RecyclerView templateRv;
     private TemplatesAdapter templatesAdapter;
@@ -31,27 +33,39 @@ public class TemplatesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_templates);
-        Log.i("TemplatesActivity", "onCrete Call");
         getSupportActionBar().setTitle("Templates");
         handleAdd();
+        setupApiService();
+        log("onCreate");
         setupData();
         setupTemplatesRv();
     }
 
-    private void deleteTemplate(Template template) {
+    private void showToast(String template) {
+        Toast.makeText(this, template, Toast.LENGTH_SHORT).show();
+    }
+
+    private void log(String template) {
+        Log.i("TemplatesActivity", template);
+    }
+
+    private void setupApiService() {
         CrudApi crudApi = new CrudApi();
-        CrudService crudService = crudApi.createCrudService();
+        crudService = crudApi.createCrudService();
+    }
+
+    private void deleteTemplate(Template template) {
         Call<Void> call = crudService.deleteTemplate(template.id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(TemplatesActivity.this, "Successfully Deleted", Toast.LENGTH_SHORT).show();
+                showToast("Successfully Deleted");
                 fetchTemplates();
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(TemplatesActivity.this, "Failed to Delete", Toast.LENGTH_SHORT).show();
+                showToast("Failed to Delete");
             }
         });
     }
@@ -59,13 +73,11 @@ public class TemplatesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i("TemplatesActivity", "onResume Call");
+        log("onResume");
         fetchTemplates();
     }
 
     private void fetchTemplates() {
-       CrudApi crudApi = new CrudApi();
-       CrudService crudService = crudApi.createCrudService();
         Call<List<Template>> call = crudService.fetchTemplates();
         call.enqueue(new Callback<List<Template>>() {
             @Override
@@ -76,7 +88,7 @@ public class TemplatesActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Template>> call, Throwable t) {
-                Toast.makeText(TemplatesActivity.this, "Templates", Toast.LENGTH_SHORT).show();
+                showToast("Failed");
             }
         });
     }
@@ -97,18 +109,18 @@ public class TemplatesActivity extends AppCompatActivity {
         templatesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Template template) {
-                Toast.makeText(TemplatesActivity.this, "On Item Clicked", Toast.LENGTH_SHORT).show();
+                showToast("On Item Clicked");
             }
 
             @Override
             public void onItemDelete(Template template) {
-                Toast.makeText(TemplatesActivity.this, "On Item Delete", Toast.LENGTH_SHORT).show();
+               showToast("On Item Delete");
                 deleteTemplate(template);
             }
 
             @Override
             public void onItemEdit(Template template) {
-                Toast.makeText(TemplatesActivity.this, "On Item Edit", Toast.LENGTH_SHORT).show();
+                showToast("On Item Edit");
             }
         });
         templateRv.setAdapter(templatesAdapter);
