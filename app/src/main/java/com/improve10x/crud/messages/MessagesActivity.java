@@ -39,8 +39,31 @@ public class MessagesActivity extends BaseActivity {
         setupApiService();
         log("onCreate");
         setupMessagesRv();
+        setupMessagesAdapter();
     }
 
+    private void setupMessagesAdapter() {
+        messagesAdapter = new MessagesAdapter();
+        messagesAdapter.setData(messageList);
+        messagesAdapter.setOnItemActionListener(new OnItemActionListener() {
+            @Override
+            public void onItemClicked(Message message) {
+                showToast("On Item Clicked");
+            }
+
+            @Override
+            public void onItemDelete(Message message) {
+                showToast("On Item Delete");
+                deleteMessage(message);
+            }
+
+            @Override
+            public void onItemEdit(Message message) {
+                showToast("On Item Edit");
+            }
+        });
+        messagesRv.setAdapter(messagesAdapter);
+    }
 
 
     @Override
@@ -98,26 +121,6 @@ public class MessagesActivity extends BaseActivity {
     private void setupMessagesRv() {
         messagesRv = findViewById(R.id.messages_rv);
         messagesRv.setLayoutManager(new LinearLayoutManager(this));
-        messagesAdapter = new MessagesAdapter();
-        messagesAdapter.setData(messageList);
-        messagesAdapter.setOnItemActionListener(new OnItemActionListener() {
-            @Override
-            public void onItemClicked(Message message) {
-                showToast("On Item Clicked");
-            }
-
-            @Override
-            public void onItemDelete(Message message) {
-                showToast("On Item Delete");
-                deleteMessage(message);
-            }
-
-            @Override
-            public void onItemEdit(Message message) {
-                showToast("On Item Edit");
-            }
-        });
-        messagesRv.setAdapter(messagesAdapter);
     }
 
     private void setupData() {
