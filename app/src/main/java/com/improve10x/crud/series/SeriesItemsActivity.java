@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
+import com.improve10x.crud.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SeriesItemsActivity extends AppCompatActivity {
+public class SeriesItemsActivity extends BaseActivity {
 
     private CrudService crudService;
     private ArrayList<SeriesItem> seriesList;
@@ -38,14 +39,6 @@ public class SeriesItemsActivity extends AppCompatActivity {
         setupData();
         setupSeriesItemsRv();
         log("onCreate");
-    }
-
-    private void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    private void log(String message) {
-        Log.i("SeriesItemsActivity", message);
     }
 
     private void setupApiService() {
@@ -119,7 +112,7 @@ public class SeriesItemsActivity extends AppCompatActivity {
 
             @Override
             public void onItemEdit(SeriesItem series) {
-               showToast("On Item Edit");
+                showToast("On Item Edit");
             }
         });
         seriesItemsRv.setAdapter(seriesItemsAdapter);
