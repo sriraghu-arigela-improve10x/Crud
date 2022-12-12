@@ -38,7 +38,31 @@ public class SeriesItemsActivity extends BaseActivity {
         handleAdd();
         setupData();
         setupSeriesItemsRv();
+        setupSeriesItemsAdapter();
         log("onCreate");
+    }
+
+    private void setupSeriesItemsAdapter() {
+        seriesItemsAdapter = new SeriesItemsAdapter();
+        seriesItemsAdapter.setData(seriesList);
+        seriesItemsAdapter.setOnItemActionListener(new OnItemActionListener() {
+            @Override
+            public void onItemClicked(SeriesItem series) {
+                showToast("On Item Clicked");
+            }
+
+            @Override
+            public void onItemDelete(SeriesItem series) {
+                showToast("On Item Delete");
+                deleteSeries(series);
+            }
+
+            @Override
+            public void onItemEdit(SeriesItem series) {
+                showToast("On Item Edit");
+            }
+        });
+        seriesItemsRv.setAdapter(seriesItemsAdapter);
     }
 
     private void setupApiService() {
@@ -96,26 +120,6 @@ public class SeriesItemsActivity extends BaseActivity {
     private void setupSeriesItemsRv() {
         seriesItemsRv = findViewById(R.id.siries_rv);
         seriesItemsRv.setLayoutManager(new LinearLayoutManager(this));
-        seriesItemsAdapter = new SeriesItemsAdapter();
-        seriesItemsAdapter.setData(seriesList);
-        seriesItemsAdapter.setOnItemActionListener(new OnItemActionListener() {
-            @Override
-            public void onItemClicked(SeriesItem series) {
-                showToast("On Item Clicked");
-            }
-
-            @Override
-            public void onItemDelete(SeriesItem series) {
-                showToast("On Item Delete");
-                deleteSeries(series);
-            }
-
-            @Override
-            public void onItemEdit(SeriesItem series) {
-                showToast("On Item Edit");
-            }
-        });
-        seriesItemsRv.setAdapter(seriesItemsAdapter);
     }
 
     private void setupData() {
