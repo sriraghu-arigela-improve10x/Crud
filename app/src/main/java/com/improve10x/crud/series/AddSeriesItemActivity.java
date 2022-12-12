@@ -17,12 +17,15 @@ import retrofit2.Response;
 
 public class AddSeriesItemActivity extends AppCompatActivity {
 
+    private CrudService crudService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_series);
         getSupportActionBar().setTitle("Add Series");
         handleAdd();
+        setupApiService();
     }
 
     private void handleAdd() {
@@ -38,25 +41,32 @@ public class AddSeriesItemActivity extends AppCompatActivity {
         });
     }
 
+    private void setupApiService() {
+        CrudApi crudApi = new CrudApi();
+        crudService = crudApi.createCrudService();
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
     private void createSeriesItems(String seriesId, String seriesName, String imageUrl) {
         SeriesItem series = new SeriesItem();
         series.seriesId = seriesId;
         series.title = seriesName;
         series.imageUrl = imageUrl;
 
-        CrudApi crudApi = new CrudApi();
-        CrudService crudService = crudApi.createCrudService();
         Call<SeriesItem> call = crudService.createSeries(series);
         call.enqueue(new Callback<SeriesItem>() {
             @Override
             public void onResponse(Call<SeriesItem> call, Response<SeriesItem> response) {
-                Toast.makeText(AddSeriesItemActivity.this, "Successfully Completed", Toast.LENGTH_SHORT).show();
+                showToast("Successfully");
                 finish();
             }
 
             @Override
             public void onFailure(Call<SeriesItem> call, Throwable t) {
-                Toast.makeText(AddSeriesItemActivity.this, "Try Again", Toast.LENGTH_SHORT).show();
+               showToast("Try Again");
             }
         });
     }
