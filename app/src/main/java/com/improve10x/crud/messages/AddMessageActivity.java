@@ -10,12 +10,13 @@ import android.widget.Toast;
 import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
+import com.improve10x.crud.base.BaseActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddMessageActivity extends AppCompatActivity {
+public class AddMessageActivity extends BaseActivity {
 
     private CrudService crudService;
     @Override
@@ -55,13 +56,13 @@ public class AddMessageActivity extends AppCompatActivity {
         call.enqueue(new Callback<Message>() {
             @Override
             public void onResponse(Call<Message> call, Response<Message> response) {
-                Toast.makeText(AddMessageActivity.this, "Successfully", Toast.LENGTH_SHORT).show();
+                showToast("Successfully");
                 finish();
             }
 
             @Override
             public void onFailure(Call<Message> call, Throwable t) {
-                Toast.makeText(AddMessageActivity.this, "Try again", Toast.LENGTH_SHORT).show();
+               showToast("Try again");
             }
         });
     }

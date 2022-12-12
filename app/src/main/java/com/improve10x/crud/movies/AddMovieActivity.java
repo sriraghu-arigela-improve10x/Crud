@@ -10,12 +10,13 @@ import android.widget.Toast;
 import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
+import com.improve10x.crud.base.BaseActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddMovieActivity extends AppCompatActivity {
+public class AddMovieActivity extends BaseActivity {
 
     private CrudService crudService;
 
@@ -43,10 +44,6 @@ public class AddMovieActivity extends AppCompatActivity {
             String description = descriptionTxt.getText().toString();
             createMovies(movieId, movieName, series, imageUrl, description);
         });
-    }
-
-    private void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void setupApiService() {
