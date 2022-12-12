@@ -39,6 +39,30 @@ public class MoviesActivity extends BaseActivity {
         setupApiService();
         log("onCreate");
         setupMoviesRv();
+        setupMoviesAdapter();
+    }
+
+    private void setupMoviesAdapter() {
+        moviesAdapter = new MoviesAdapter();
+        moviesAdapter.setData(movieList);
+        moviesAdapter.setOnItemActionListener(new OnItemActionListener() {
+            @Override
+            public void onItemClicked(Movie movie) {
+                showToast("On Item Clicked");
+            }
+
+            @Override
+            public void onItemDeleted(Movie movie) {
+                showToast("On Item Delete");
+                deleteMovie(movie);
+            }
+
+            @Override
+            public void onItemEdit(Movie movie) {
+                showToast("On Item Edit");
+            }
+        });
+        moviesRv.setAdapter(moviesAdapter);
     }
 
     private void setupApiService() {
@@ -96,26 +120,6 @@ public class MoviesActivity extends BaseActivity {
     private void setupMoviesRv() {
         moviesRv = findViewById(R.id.movies_rv);
         moviesRv.setLayoutManager(new GridLayoutManager(this, 2));
-        moviesAdapter = new MoviesAdapter();
-        moviesAdapter.setData(movieList);
-        moviesAdapter.setOnItemActionListener(new OnItemActionListener() {
-            @Override
-            public void onItemClicked(Movie movie) {
-                showToast("On Item Clicked");
-            }
-
-            @Override
-            public void onItemDeleted(Movie movie) {
-               showToast("On Item Delete");
-                deleteMovie(movie);
-            }
-
-            @Override
-            public void onItemEdit(Movie movie) {
-                showToast("On Item Edit");
-            }
-        });
-        moviesRv.setAdapter(moviesAdapter);
     }
 
     private void setupData() {
