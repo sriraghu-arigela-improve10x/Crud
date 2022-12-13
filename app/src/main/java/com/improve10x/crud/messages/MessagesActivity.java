@@ -52,6 +52,7 @@ public class MessagesActivity extends BaseActivity {
                 Intent intent = new Intent(MessagesActivity.this, AddMessageActivity.class);
                 intent.putExtra(Constants.KEY_MESSAGES, message);
                 startActivity(intent);
+                //showToast("On Item Clicked");
             }
 
             @Override
