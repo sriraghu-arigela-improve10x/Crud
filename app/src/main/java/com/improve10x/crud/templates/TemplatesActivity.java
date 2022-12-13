@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.improve10x.crud.Constants;
 import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
@@ -48,7 +49,10 @@ public class TemplatesActivity extends BaseActivity {
         templatesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Template template) {
-                showToast("On Item Clicked");
+                Intent intent = new Intent(TemplatesActivity.this, AddTemplateActivity.class);
+                intent.putExtra(Constants.TEMPLATES_END_POINT, templateList);
+                startActivity(intent);
+               // showToast("On Item Clicked");
             }
 
             @Override
