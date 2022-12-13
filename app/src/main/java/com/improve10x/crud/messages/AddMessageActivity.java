@@ -1,5 +1,6 @@
 package com.improve10x.crud.messages;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,10 @@ public class AddMessageActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_message);
+        Intent intent = getIntent();
+
+
+
         getSupportActionBar().setTitle("Add Message");
         setupViews();
         setupApiService();

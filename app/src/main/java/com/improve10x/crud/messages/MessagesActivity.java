@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.improve10x.crud.Constants;
 import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
@@ -48,7 +49,9 @@ public class MessagesActivity extends BaseActivity {
         messagesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Message message) {
-                showToast("On Item Clicked");
+                Intent intent = new Intent(MessagesActivity.this, AddMessageActivity.class);
+                intent.putExtra(Constants.KEY_MESSAGES, message);
+                startActivity(intent);
             }
 
             @Override
