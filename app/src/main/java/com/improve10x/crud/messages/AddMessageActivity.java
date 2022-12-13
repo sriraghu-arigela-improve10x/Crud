@@ -2,6 +2,7 @@ package com.improve10x.crud.messages;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -18,12 +19,12 @@ import retrofit2.Response;
 public class AddMessageActivity extends BaseActivity {
 
     private CrudService crudService;
-    private Button addBtn;
     private EditText nameTxt;
     private EditText phoneNumberTxt;
-    private  EditText addMessageTxt;
+    private EditText addMessageTxt;
     private Message message;
-    private EditText editBtn;
+    private Button addBtn;
+    private Button editBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +33,15 @@ public class AddMessageActivity extends BaseActivity {
         setupViews();
         setupApiService();
         Intent intent = getIntent();
-        if(intent.hasExtra(Constants.KEY_MESSAGES)) {
+        if (intent.hasExtra(Constants.KEY_MESSAGES)) {
             getSupportActionBar().setTitle("Edit Message");
             message = (Message) intent.getSerializableExtra(Constants.KEY_MESSAGES);
             showData();
+            showEditBtn();
             handleEdit();
         } else {
             getSupportActionBar().setTitle("Add Message");
+            showAddBtn();
             handleAdd();
         }
     }
@@ -54,14 +57,40 @@ public class AddMessageActivity extends BaseActivity {
     }
 
     private void updateMessage(String id, Message updatedMessage) {
+        Call<Void> call = crudService.updateMessage(id, updatedMessage);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                showToast("Successfully");
+                finish();
+            }
 
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                showToast("Failed");
+            }
+        });
     }
 
+    private void showAddBtn() {
+        addBtn.setVisibility(View.VISIBLE);
+        editBtn.setVisibility(View.GONE);
+    }
+
+    private void showEditBtn() {
+        addBtn.setVisibility(View.GONE);
+        editBtn.setVisibility(View.VISIBLE);
+    }
 
     private void showData() {
         nameTxt.setText(message.title);
-        phoneNumberTxt.setText(message.toString());
+        phoneNumberTxt.setText(message.phoneNumber);
         addMessageTxt.setText(message.messageText);
+    }
+
+    private void setupApiService() {
+        CrudApi crudApi = new CrudApi();
+        crudService = crudApi.createCrudService();
     }
 
     private void handleAdd() {
@@ -99,14 +128,10 @@ public class AddMessageActivity extends BaseActivity {
     }
 
     private void setupViews() {
+        editBtn =findViewById(R.id.edit_btn);
         addBtn = findViewById(R.id.add_btn);
         nameTxt = findViewById(R.id.name_txt);
         phoneNumberTxt = findViewById(R.id.phone_number_txt);
         addMessageTxt = findViewById(R.id.add_message_txt);
-    }
-
-    private void setupApiService() {
-        CrudApi crudApi = new CrudApi();
-        crudService = crudApi.createCrudService();
     }
 }
