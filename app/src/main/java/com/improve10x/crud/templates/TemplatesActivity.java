@@ -39,6 +39,30 @@ public class TemplatesActivity extends BaseActivity {
         log("onCreate");
         setupData();
         setupTemplatesRv();
+        setupTemplatesAdapter();
+    }
+
+    private void setupTemplatesAdapter() {
+        templatesAdapter = new TemplatesAdapter();
+        templatesAdapter.setData(templateList);
+        templatesAdapter.setOnItemActionListener(new OnItemActionListener() {
+            @Override
+            public void onItemClicked(Template template) {
+                showToast("On Item Clicked");
+            }
+
+            @Override
+            public void onItemDelete(Template template) {
+                showToast("On Item Delete");
+                deleteTemplate(template);
+            }
+
+            @Override
+            public void onItemEdit(Template template) {
+                showToast("On Item Edit");
+            }
+        });
+        templateRv.setAdapter(templatesAdapter);
     }
 
     private void setupApiService() {
@@ -96,26 +120,6 @@ public class TemplatesActivity extends BaseActivity {
     private void setupTemplatesRv() {
         templateRv = findViewById(R.id.template_rv);
         templateRv.setLayoutManager(new LinearLayoutManager(this));
-        templatesAdapter = new TemplatesAdapter();
-        templatesAdapter.setData(templateList);
-        templatesAdapter.setOnItemActionListener(new OnItemActionListener() {
-            @Override
-            public void onItemClicked(Template template) {
-                showToast("On Item Clicked");
-            }
-
-            @Override
-            public void onItemDelete(Template template) {
-               showToast("On Item Delete");
-                deleteTemplate(template);
-            }
-
-            @Override
-            public void onItemEdit(Template template) {
-                showToast("On Item Edit");
-            }
-        });
-        templateRv.setAdapter(templatesAdapter);
     }
 
     private void setupData() {

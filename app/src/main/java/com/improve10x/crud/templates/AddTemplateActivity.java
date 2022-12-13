@@ -1,11 +1,8 @@
 package com.improve10x.crud.templates;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
@@ -19,6 +16,9 @@ import retrofit2.Response;
 public class AddTemplateActivity extends BaseActivity {
 
     private CrudService crudService;
+    private Button addBtn;
+    private EditText templateMessageTxt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +29,12 @@ public class AddTemplateActivity extends BaseActivity {
     }
 
     private void handleAdd() {
-        Button addBtn = findViewById(R.id.add_btn);
+        addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
-            EditText templateMessageTxt = findViewById(R.id.template_message_txt);
+            templateMessageTxt = findViewById(R.id.template_message_txt);
             String templateMessage = templateMessageTxt.getText().toString();
-            createTemplate(templateMessage);
+            Template template = createTemplate(templateMessage);
+            saveMessage(template);
         });
     }
 
@@ -42,10 +43,13 @@ public class AddTemplateActivity extends BaseActivity {
         crudService = crudApi.createCrudService();
     }
 
-    private void createTemplate(String templateMessage) {
+    private Template createTemplate(String templateMessage) {
         Template template = new Template();
         template.messageText = templateMessage;
+        return template;
+    }
 
+    private void saveMessage(Template template) {
         Call<Template> call = crudService.createTemplate(template);
         call.enqueue(new Callback<Template>() {
             @Override
@@ -56,7 +60,7 @@ public class AddTemplateActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<Template> call, Throwable t) {
-               showToast("Try again");
+                showToast("Try again");
             }
         });
     }
