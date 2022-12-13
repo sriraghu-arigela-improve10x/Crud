@@ -27,7 +27,12 @@ public class AddTemplateActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_template);
         Intent intent = getIntent();
-        template = (Template) intent.getSerializableExtra(Constants.KEY_TEMPLATES);
+        template = (Template) intent.getSerializableExtra(Constants.KEY_TEMPLATE);
+        if(intent.hasExtra(Constants.KEY_TEMPLATE)) {
+            getSupportActionBar().setTitle("Edit Template");
+        } else {
+            getSupportActionBar().setTitle("Add Template");
+        }
         getSupportActionBar().setTitle("Add Template");
         handleAdd();
         setupAPiService();
