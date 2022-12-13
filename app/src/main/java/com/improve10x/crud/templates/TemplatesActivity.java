@@ -50,7 +50,7 @@ public class TemplatesActivity extends BaseActivity {
             @Override
             public void onItemClicked(Template template) {
                 Intent intent = new Intent(TemplatesActivity.this, AddTemplateActivity.class);
-                intent.putExtra(Constants.TEMPLATES_END_POINT, templateList);
+                intent.putExtra(Constants.KEY_TEMPLATE, template);
                 startActivity(intent);
                // showToast("On Item Clicked");
             }
