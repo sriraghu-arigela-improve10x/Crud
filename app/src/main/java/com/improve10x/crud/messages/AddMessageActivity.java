@@ -22,15 +22,46 @@ public class AddMessageActivity extends BaseActivity {
     private EditText nameTxt;
     private EditText phoneNumberTxt;
     private  EditText addMessageTxt;
+    private Message message;
+    private EditText editBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_message);
-        getSupportActionBar().setTitle("Add Message");
         setupViews();
         setupApiService();
-        handleAdd();
+        Intent intent = getIntent();
+        if(intent.hasExtra(Constants.KEY_MESSAGES)) {
+            getSupportActionBar().setTitle("Edit Message");
+            message = (Message) intent.getSerializableExtra(Constants.KEY_MESSAGES);
+            showData();
+            handleEdit();
+        } else {
+            getSupportActionBar().setTitle("Add Message");
+            handleAdd();
+        }
+    }
+
+    private void handleEdit() {
+        editBtn.setOnClickListener(view -> {
+            String name = nameTxt.getText().toString();
+            String phoneNUmber = phoneNumberTxt.getText().toString();
+            String addMessage = addMessageTxt.getText().toString();
+            Message updatedMessage = createMessage(name, phoneNUmber, addMessage);
+            updateMessage(message.id, updatedMessage);
+        });
+    }
+
+    private void updateMessage(String id, Message updatedMessage) {
+
+    }
+
+
+    private void showData() {
+        nameTxt.setText(message.title);
+        phoneNumberTxt.setText(message.toString());
+        addMessageTxt.setText(message.messageText);
     }
 
     private void handleAdd() {
