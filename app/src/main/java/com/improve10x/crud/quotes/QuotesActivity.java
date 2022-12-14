@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.Button;
 
+import com.improve10x.crud.Constants;
 import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
@@ -79,7 +80,10 @@ public class QuotesActivity extends BaseActivity {
         quotesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Quote quote) {
-                showToast("on Item Clicked");
+                Intent intent = new Intent(QuotesActivity.this, AddEditQuoteActivity.class);
+                intent.putExtra(Constants.KEY_QUOTE, quote);
+                startActivity(intent);
+                //showToast("on Item Clicked");
             }
 
             @Override
