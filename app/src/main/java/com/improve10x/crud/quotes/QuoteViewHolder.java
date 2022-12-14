@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.improve10x.crud.R;
 
 public class QuoteViewHolder extends RecyclerView.ViewHolder {
-    ImageView quoteTextTxt;
+    ImageView quoteImageBtn;
     TextView authorNameTxt;
-    TextView quoteImageBtn;
+    TextView quoteTextTxt;
 
     public QuoteViewHolder(@NonNull View itemView) {
         super(itemView);
