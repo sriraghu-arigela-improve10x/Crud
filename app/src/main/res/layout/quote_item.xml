@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_weight="1"
     android:orientation="vertical"
     android:padding="8dp">
 
@@ -14,24 +15,47 @@
         android:adjustViewBounds="true"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <TextView
-        android:id="@+id/quote_text_txt"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="#BAB5B5"
-        android:gravity="center_horizontal"
-        android:text="TextView"
-        android:textColor="#A39595"
-        android:textSize="16sp" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/authornname_txt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:backgroundTint="#BAB5B5"
-        android:gravity="center_horizontal"
-        android:text="TextView"
-        android:textColor="#070505" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/quote_text_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#BAB5B5"
+                android:gravity="center_horizontal"
+                android:text="TextView"
+                android:textColor="#A39595"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/authorname_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:backgroundTint="#BAB5B5"
+                android:gravity="center_horizontal"
+                android:text="TextView"
+                android:textColor="#070505" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/delete_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_baseline_close_24" />
+
+    </LinearLayout>
+
 </LinearLayout>

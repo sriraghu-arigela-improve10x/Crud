@@ -17,6 +17,12 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuoteViewHolder> {
 
     private List<Quote> quotes;
 
+    private OnItemActionListener onItemActionListener;
+
+    void setOnItemActionListener(OnItemActionListener listener) {
+        onItemActionListener = listener;
+    }
+
     void setData(List<Quote> quoteList) {
         quotes = quoteList;
         notifyDataSetChanged();
@@ -36,6 +42,12 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuoteViewHolder> {
         holder.quoteTextTxt.setText(quote.quoteText);
         if(quote.imageUrl != null && quote.imageUrl.isEmpty() == false) {
             Picasso.get().load(quote.imageUrl).into(holder.quoteImageBtn);
+            holder.deleteBtn.setOnClickListener(view -> {
+                onItemActionListener.onItemDeleted(quote);
+            });
+            holder.itemView.setOnClickListener(view -> {
+                onItemActionListener.onItemClicked(quote);
+            });
         }
     }
 
