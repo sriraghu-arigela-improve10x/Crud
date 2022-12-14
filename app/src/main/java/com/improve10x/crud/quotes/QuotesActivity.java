@@ -8,10 +8,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 
 import com.improve10x.crud.R;
+import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
 import com.improve10x.crud.base.BaseActivity;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class QuotesActivity extends BaseActivity {
     private CrudService crudService;
@@ -26,6 +32,29 @@ public class QuotesActivity extends BaseActivity {
         setupData();
         setupQuotesRv();
         setupAdapter();
+        setupApi();
+        fetchQuotes();
+    }
+
+    private void fetchQuotes() {
+        Call<List<Quote>> call = crudService.fetchQuotes();
+        call.enqueue(new Callback<List<Quote>>() {
+            @Override
+            public void onResponse(Call<List<Quote>> call, Response<List<Quote>> response) {
+                List<Quote> quotes = response.body();
+                quotesAdapter.setData(quotes);
+            }
+
+            @Override
+            public void onFailure(Call<List<Quote>> call, Throwable t) {
+                showToast("failed");
+            }
+        });
+    }
+
+    private void setupApi() {
+        CrudApi crudApi = new CrudApi();
+        crudService = crudApi.createCrudService();
     }
 
     private void setupAdapter() {

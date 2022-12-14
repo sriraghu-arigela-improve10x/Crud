@@ -3,10 +3,12 @@ package com.improve10x.crud.api;
 import com.improve10x.crud.Constants;
 import com.improve10x.crud.messages.Message;
 import com.improve10x.crud.movies.Movie;
+import com.improve10x.crud.quotes.Quote;
 import com.improve10x.crud.series.SeriesItem;
 import com.improve10x.crud.templates.Template;
 
 import java.util.List;
+import java.util.Queue;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -65,6 +67,16 @@ public interface CrudService {
     @PUT(Constants.MOVIES_END_POINT + "/{id}")
     Call<Void> updatedMovie(@Path("id") String id, @Body Movie movie);
 
+    @GET(Constants.QUOTES_END_POINT)
+    Call<List<Quote>> fetchQuotes();
 
+    @POST(Constants.QUOTES_END_POINT)
+    Call<Quote> createQuote(@Body Quote quote);
+
+    @DELETE(Constants.QUOTES_END_POINT + "/{id}")
+    Call<Void> deleteQuote(@Path("id") String id);
+
+    @PUT(Constants.QUOTES_END_POINT + "/{id}")
+    Call<Void> updatedQuote(@Path("id") String id, @Body Quote quote);
 
 }
