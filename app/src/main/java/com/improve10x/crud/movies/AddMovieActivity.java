@@ -43,8 +43,8 @@ public class AddMovieActivity extends BaseActivity {
             showEditBtn();
         } else {
             getSupportActionBar().setTitle("Add Movie");
-            handleAdd();
             showAddBtn();
+            handleAdd();
         }
     }
 
@@ -66,11 +66,11 @@ public class AddMovieActivity extends BaseActivity {
            String imageUrl = imageUrlTxt.getText().toString();
            String description = descriptionTxt.getText().toString();
            Movie updatedMovie =  createMovies(movieId, movieName, series, imageUrl, description);
-           updatedMovie(movie.movieId, updatedMovie);
+           updateMovie(movie.id, updatedMovie);
        }); 
     }
 
-    private void updatedMovie(String movieId, Movie updatedMovie) {
+    private void updateMovie(String movieId, Movie updatedMovie) {
         Call<Void> call = crudService.updatedMovie(movieId, updatedMovie);
         call.enqueue(new Callback<Void>() {
             @Override
