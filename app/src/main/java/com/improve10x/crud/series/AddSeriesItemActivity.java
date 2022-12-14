@@ -1,9 +1,11 @@
 package com.improve10x.crud.series;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.improve10x.crud.Constants;
 import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
@@ -19,30 +21,44 @@ public class AddSeriesItemActivity extends BaseActivity {
     private Button addBtn;
     private EditText seriesIdTxt;
     private EditText seriesNameTxt;
-    private EditText imageUrlTxt;
+    private EditText seriesImageUrlTxt;
+    private SeriesItem seriesItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_series);
-        getSupportActionBar().setTitle("Add Series");
+        Intent intent = getIntent();
         setupViews();
-        handleAdd();
         setupApiService();
+        if(intent.hasExtra(Constants.KEY_SERIES)) {
+            getSupportActionBar().setTitle("Edit SeriesItem");
+            seriesItem = (SeriesItem) intent.getSerializableExtra(Constants.KEY_SERIES);
+            showData();
+        } else {
+            getSupportActionBar().setTitle("Add SeriesItem");
+            handleAdd();
+        }
+    }
+
+    private void showData() {
+        seriesIdTxt.setText(seriesItem.seriesId);
+        seriesNameTxt.setText(seriesItem.title);
+        seriesImageUrlTxt.setText(seriesItem.imageUrl);
     }
 
     private void setupViews() {
         addBtn = findViewById(R.id.add_btn);
         seriesIdTxt = findViewById(R.id.seriesid_txt);
         seriesNameTxt = findViewById(R.id.series_name_txt);
-        imageUrlTxt = findViewById(R.id.image_url_txt);
+        seriesImageUrlTxt = findViewById(R.id.image_url_txt);
     }
 
     private void handleAdd() {
         addBtn.setOnClickListener(view -> {
             String seriesId = seriesIdTxt.getText().toString();
             String seriesName = seriesNameTxt.getText().toString();
-            String imageUrl = imageUrlTxt.getText().toString();
+            String imageUrl = seriesImageUrlTxt.getText().toString();
             SeriesItem seriesItem =  createSeriesItems(seriesId, seriesName, imageUrl);
             saveMessage(seriesItem);
         });
