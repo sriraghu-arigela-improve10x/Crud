@@ -23,6 +23,7 @@ public class AddSeriesItemActivity extends BaseActivity {
     private EditText seriesNameTxt;
     private EditText seriesImageUrlTxt;
     private SeriesItem seriesItem;
+    private Button editBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +36,37 @@ public class AddSeriesItemActivity extends BaseActivity {
             getSupportActionBar().setTitle("Edit SeriesItem");
             seriesItem = (SeriesItem) intent.getSerializableExtra(Constants.KEY_SERIES);
             showData();
+            handleEdit();
         } else {
             getSupportActionBar().setTitle("Add SeriesItem");
             handleAdd();
         }
+    }
+
+    private void handleEdit() {
+        editBtn.setOnClickListener(view -> {
+            String seriesId = seriesIdTxt.getText().toString();
+            String seriesName = seriesNameTxt.getText().toString();
+            String imageUrl = seriesImageUrlTxt.getText().toString();
+            SeriesItem updatedSeriesItem = createSeriesItems(seriesId, seriesName, imageUrl);
+            updateSeriesItem(seriesItem.id, updatedSeriesItem);
+        });
+    }
+
+    private void updateSeriesItem(String id, SeriesItem updatedSeriesItem) {
+        Call<Void> call = crudService.updateSeries(id, updatedSeriesItem);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                showToast("Successfully");
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                showToast("Failed");
+            }
+        });
     }
 
     private void showData() {
