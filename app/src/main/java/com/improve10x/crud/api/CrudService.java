@@ -63,7 +63,7 @@ public interface CrudService {
     Call<Void> deleteMovie(@Path("id") String id);
 
     @PUT(Constants.MOVIES_END_POINT + "/{id}")
-    Call<Void> updateMovies(@Path("id") String id, @Body Movie movie);
+    Call<Void> updatedMovie(@Path("id") String id, @Body Movie movie);
 
 
 }
