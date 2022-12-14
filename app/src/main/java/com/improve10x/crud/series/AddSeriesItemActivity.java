@@ -2,6 +2,7 @@ package com.improve10x.crud.series;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -37,10 +38,21 @@ public class AddSeriesItemActivity extends BaseActivity {
             seriesItem = (SeriesItem) intent.getSerializableExtra(Constants.KEY_SERIES);
             showData();
             handleEdit();
+            showEditBtn();
         } else {
             getSupportActionBar().setTitle("Add SeriesItem");
             handleAdd();
         }
+    }
+
+    private void showEditBtn() {
+        addBtn.setVisibility(View.GONE);
+        editBtn.setVisibility(View.VISIBLE);
+    }
+
+    private void showAddBtn() {
+        addBtn.setVisibility(View.VISIBLE);
+        editBtn.setVisibility(View.GONE);
     }
 
     private void handleEdit() {
@@ -77,6 +89,7 @@ public class AddSeriesItemActivity extends BaseActivity {
 
     private void setupViews() {
         addBtn = findViewById(R.id.add_btn);
+        editBtn = findViewById(R.id.edit_btn);
         seriesIdTxt = findViewById(R.id.seriesid_txt);
         seriesNameTxt = findViewById(R.id.series_name_txt);
         seriesImageUrlTxt = findViewById(R.id.image_url_txt);
