@@ -1,22 +1,42 @@
 package com.improve10x.crud.quotes;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 
 import com.improve10x.crud.R;
+import com.improve10x.crud.api.CrudService;
 import com.improve10x.crud.base.BaseActivity;
 
 import java.util.ArrayList;
 
 public class QuotesActivity extends BaseActivity {
+    private CrudService crudService;
     private ArrayList<Quote> quotes;
+    private QuotesAdapter quotesAdapter;
+    private RecyclerView quoteRv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quotes);
         getSupportActionBar().setTitle("Quotes");
         setupData();
+        setupQuotesRv();
+        setupAdapter();
+    }
+
+    private void setupAdapter() {
+        quotesAdapter = new QuotesAdapter();
+        quotesAdapter.setData(quotes);
+        quoteRv.setAdapter(quotesAdapter);
+    }
+
+    private void setupQuotesRv() {
+        quoteRv = findViewById(R.id.quote_rv);
+        quoteRv.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void setupData() {
