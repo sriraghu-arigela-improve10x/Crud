@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.widget.Button;
 
 import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
@@ -29,10 +31,24 @@ public class QuotesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quotes);
         getSupportActionBar().setTitle("Quotes");
+        handleAdd();
         setupData();
+        setupApi();
         setupQuotesRv();
         setupAdapter();
-        setupApi();
+    }
+
+    private void handleAdd() {
+        Button addBtn = findViewById(R.id.add_btn);
+        addBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(this, AddEditQuoteActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         fetchQuotes();
     }
 
@@ -71,7 +87,7 @@ public class QuotesActivity extends BaseActivity {
     private void setupData() {
         quotes = new ArrayList<>();
 
-        Quote quoteTxt = new Quote();
+       /* Quote quoteTxt = new Quote();
         quoteTxt.quoteText = "Your FUTURE is created by what you do TODAY";
         quoteTxt.authorName = "";
         quoteTxt.category = "career";
@@ -83,6 +99,6 @@ public class QuotesActivity extends BaseActivity {
         quoteTxt1.authorName = "Tony Robbins";
         quoteTxt1.category = "progress";
         quoteTxt1.imageUrl = "https://emilysquotes.files.wordpress.com/2014/03/emilysquotes-com-mistakes-progress-slow-trying-tony-robbins-inspirational-motivational.jpg?w=788";
-        quotes.add(quoteTxt1);
+        quotes.add(quoteTxt1);*/
     }
 }
