@@ -42,6 +42,7 @@ public class AddSeriesItemActivity extends BaseActivity {
         } else {
             getSupportActionBar().setTitle("Add SeriesItem");
             handleAdd();
+            showAddBtn();
         }
     }
 

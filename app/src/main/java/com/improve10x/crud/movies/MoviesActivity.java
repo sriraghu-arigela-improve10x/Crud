@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.improve10x.crud.Constants;
 import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
@@ -48,7 +49,10 @@ public class MoviesActivity extends BaseActivity {
         moviesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Movie movie) {
-                showToast("On Item Clicked");
+                Intent intent = new Intent(MoviesActivity.this, AddMovieActivity.class);
+                intent.putExtra(Constants.KEY_MOVIES, movie);
+                startActivity(intent);
+                //showToast("On Item Clicked");
             }
 
             @Override

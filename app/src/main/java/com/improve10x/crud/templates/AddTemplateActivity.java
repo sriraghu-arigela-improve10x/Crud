@@ -92,7 +92,7 @@ public class AddTemplateActivity extends BaseActivity {
         addBtn.setOnClickListener(view -> {
             String templateMessage = templateMessageTxt.getText().toString();
             Template template = createTemplate(templateMessage);
-            saveMessage(template);
+            saveTemplate(template);
         });
     }
 
@@ -107,7 +107,7 @@ public class AddTemplateActivity extends BaseActivity {
         return template;
     }
 
-    private void saveMessage(Template template) {
+    private void saveTemplate(Template template) {
         Call<Template> call = crudService.createTemplate(template);
         call.enqueue(new Callback<Template>() {
             @Override
