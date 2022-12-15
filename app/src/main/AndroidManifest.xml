@@ -16,7 +16,14 @@
         android:theme="@style/Theme.Crud"
         tools:targetApi="31">
         <activity
-            android:name=".quotes.AddEditQuoteActivity"
+            android:name=".quotes.AddQuoteActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".quotes.EditQuoteActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
