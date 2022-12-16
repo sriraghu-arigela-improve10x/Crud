@@ -37,15 +37,6 @@ public class AddQuoteActivity extends BaseAddEditQuoteActivity {
         });
     }
 
-    private Quote createQuote(String quote, String authorName, String category, String imageUrl) {
-        Quote quotes = new Quote();
-        quotes.quoteText = quote;
-        quotes.authorName = authorName;
-        quotes.category = category;
-        quotes.imageUrl = imageUrl;
-        return quotes;
-    }
-
     private void saveQuote(Quote quote) {
         Call<Quote> call = crudService.createQuote(quote);
         call.enqueue(new Callback<Quote>() {
