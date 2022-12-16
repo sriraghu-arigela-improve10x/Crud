@@ -29,7 +29,7 @@ public class EditQuoteActivity extends BaseAddEditQuoteActivity{
         }
     }
 
-    void setupViews() {
+    private void setupViews() {
         editBtn = findViewById(R.id.edit_btn);
     }
 

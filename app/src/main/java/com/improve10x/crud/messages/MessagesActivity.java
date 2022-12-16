@@ -1,14 +1,11 @@
 package com.improve10x.crud.messages;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.improve10x.crud.Constants;
 import com.improve10x.crud.R;
@@ -49,7 +46,7 @@ public class MessagesActivity extends BaseActivity {
         messagesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Message message) {
-                Intent intent = new Intent(MessagesActivity.this, AddMessageActivity.class);
+                Intent intent = new Intent(MessagesActivity.this, EditMessageActivity.class);
                 intent.putExtra(Constants.KEY_MESSAGES, message);
                 startActivity(intent);
                 //showToast("On Item Clicked");
@@ -117,7 +114,7 @@ public class MessagesActivity extends BaseActivity {
     private void handleAdd() {
         Button addBtn = findViewById(R.id.add_btn);
         addBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(this, AddMessageActivity.class);
+            Intent intent = new Intent(this,AddMessageActivity.class);
             startActivity(intent);
         });
     }

@@ -58,6 +58,9 @@
             android:name=".messages.AddMessageActivity"
             android:exported="false" />
         <activity
+            android:name=".messages.EditMessageActivity"
+            android:exported="false" />
+        <activity
             android:name=".messages.MessagesActivity"
             android:exported="false" />
         <activity
