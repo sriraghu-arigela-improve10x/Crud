@@ -58,6 +58,9 @@
             android:name=".series.AddSeriesItemActivity"
             android:exported="false" />
         <activity
+            android:name=".series.EditSeriesItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".series.SeriesItemsActivity"
             android:exported="false" />
         <activity
