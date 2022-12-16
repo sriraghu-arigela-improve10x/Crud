@@ -67,6 +67,9 @@
             android:name=".templates.AddTemplateActivity"
             android:exported="false" />
         <activity
+            android:name=".templates.EditTemplateActivity"
+            android:exported="false" />
+        <activity
             android:name=".templates.TemplatesActivity"
             android:exported="false" />
         <activity

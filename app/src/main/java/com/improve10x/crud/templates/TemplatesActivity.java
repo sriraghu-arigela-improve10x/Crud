@@ -1,14 +1,11 @@
 package com.improve10x.crud.templates;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.improve10x.crud.Constants;
 import com.improve10x.crud.R;
@@ -49,7 +46,7 @@ public class TemplatesActivity extends BaseActivity {
         templatesAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Template template) {
-                Intent intent = new Intent(TemplatesActivity.this, AddTemplateActivity.class);
+                Intent intent = new Intent(TemplatesActivity.this, EditTemplateActivity.class);
                 intent.putExtra(Constants.KEY_TEMPLATE, template);
                 startActivity(intent);
                // showToast("On Item Clicked");
