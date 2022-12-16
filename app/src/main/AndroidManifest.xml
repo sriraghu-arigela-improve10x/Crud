@@ -38,7 +38,19 @@
         </activity>
         <activity
             android:name=".movies.AddMovieActivity"
-            android:exported="false" />
+            android:exported="false">
+        </activity>
+        <meta-data
+            android:name="android.app.lib_name"
+            android:value="" />
+        <activity
+            android:name=".movies.EditMovieActivity"
+            android:exported="false">
+        </activity>
+        <meta-data
+            android:name="android.app.lib_name"
+            android:value="" />
+
         <activity
             android:name=".movies.MoviesActivity"
             android:exported="false" />

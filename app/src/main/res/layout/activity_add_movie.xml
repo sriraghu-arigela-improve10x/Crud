@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="8dp"
-    tools:context=".movies.AddMovieActivity">
+    tools:context=".movies.BaseAddEditMovieActivity">
 
     <TextView
         android:id="@+id/textView14"
@@ -101,7 +101,8 @@
             android:backgroundTint="#00BCD4"
             android:text="Add"
             android:textAllCaps="false"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/edit_btn"
@@ -110,7 +111,8 @@
             android:backgroundTint="#00BCD4"
             android:text="Edit"
             android:textAllCaps="false"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>
