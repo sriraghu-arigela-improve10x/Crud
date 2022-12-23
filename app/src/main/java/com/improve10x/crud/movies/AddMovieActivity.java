@@ -12,32 +12,25 @@ import retrofit2.Response;
 
 public class AddMovieActivity extends BaseAddEditMovieActivity{
 
-    private Button addBtn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupViews();
         getSupportActionBar().setTitle("Add Movie");
         showAddBtn();
         handleAdd();
     }
 
-    private void setupViews() {
-        addBtn = findViewById(R.id.add_btn);
-    }
-
     private void showAddBtn() {
-        addBtn.setVisibility(View.VISIBLE);
+        binding.addBtn.setVisibility(View.VISIBLE);
     }
 
     private void handleAdd() {
-        addBtn.setOnClickListener(view -> {
-            String movieId = movieIdTxt.getText().toString();
-            String movieName = movieNameTxt.getText().toString();
-            String series = seriesTxt.getText().toString();
-            String imageUrl = imageUrlTxt.getText().toString();
-            String description = descriptionTxt.getText().toString();
+        binding.addBtn.setOnClickListener(view -> {
+            String movieId = binding.movieIdTxt.getText().toString();
+            String movieName = binding.movieNameTxt.getText().toString();
+            String series = binding.seriesTxt.getText().toString();
+            String imageUrl = binding.imageUrlTxt.getText().toString();
+            String description = binding.descriptionTxt.getText().toString();
             Movie movie =  createMovies(movieId, movieName, series, imageUrl, description);
             saveMessage(movie);
         });

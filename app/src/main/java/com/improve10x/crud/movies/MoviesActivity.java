@@ -12,6 +12,7 @@ import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
 import com.improve10x.crud.base.BaseActivity;
+import com.improve10x.crud.databinding.ActivityMoviesBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,16 +22,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MoviesActivity extends BaseActivity {
-
+    private ActivityMoviesBinding binding;
     private CrudService crudService;
     private ArrayList<Movie> movieList;
-    private RecyclerView moviesRv;
     private MoviesAdapter moviesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movies);
+        binding = ActivityMoviesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Movies");
         handleAdd();
         setupData();
@@ -63,7 +64,7 @@ public class MoviesActivity extends BaseActivity {
                 showToast("On Item Edit");
             }
         });
-        moviesRv.setAdapter(moviesAdapter);
+        binding.moviesRv.setAdapter(moviesAdapter);
     }
 
     private void setupApiService() {
@@ -95,8 +96,7 @@ public class MoviesActivity extends BaseActivity {
     }
 
     private void handleAdd() {
-        Button addBtn = findViewById(R.id.add_btn);
-        addBtn.setOnClickListener(view -> {
+        binding.addBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddMovieActivity.class);
             startActivity(intent);
         });
@@ -119,8 +119,7 @@ public class MoviesActivity extends BaseActivity {
     }
 
     private void setupMoviesRv() {
-        moviesRv = findViewById(R.id.movies_rv);
-        moviesRv.setLayoutManager(new GridLayoutManager(this, 2));
+        binding.moviesRv.setLayoutManager(new GridLayoutManager(this, 2));
     }
 
     private void setupData() {

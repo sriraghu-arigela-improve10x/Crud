@@ -14,12 +14,9 @@ import retrofit2.Response;
 
 public class EditMovieActivity extends BaseAddEditMovieActivity{
 
-    private Button editBtn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupViews();
         Intent intent =getIntent();
         if(intent.hasExtra(Constants.KEY_MOVIES)) {
             getSupportActionBar().setTitle("Edit Movie");
@@ -30,25 +27,21 @@ public class EditMovieActivity extends BaseAddEditMovieActivity{
         }
     }
 
-    private void setupViews() {
-        editBtn = findViewById(R.id.edit_btn);
-    }
-
     private void showData() {
-        movieIdTxt.setText(movie.movieId);
-        movieNameTxt.setText(movie.name);
-        seriesTxt.setText(movie.movieSeriesId);
-        imageUrlTxt.setText(movie.imageUrl);
-        descriptionTxt.setText(movie.description);
+        binding.movieIdTxt.setText(movie.movieId);
+        binding.movieNameTxt.setText(movie.name);
+        binding.seriesTxt.setText(movie.movieSeriesId);
+        binding.imageUrlTxt.setText(movie.imageUrl);
+        binding.descriptionTxt.setText(movie.description);
     }
 
     private void handleEdit() {
-        editBtn.setOnClickListener(view -> {
-            String movieId = movieIdTxt.getText().toString();
-            String movieName = movieNameTxt.getText().toString();
-            String series = seriesTxt.getText().toString();
-            String imageUrl = imageUrlTxt.getText().toString();
-            String description = descriptionTxt.getText().toString();
+        binding.editBtn.setOnClickListener(view -> {
+            String movieId = binding.movieIdTxt.getText().toString();
+            String movieName = binding.movieNameTxt.getText().toString();
+            String series = binding.seriesTxt.getText().toString();
+            String imageUrl = binding.imageUrlTxt.getText().toString();
+            String description = binding.descriptionTxt.getText().toString();
             Movie updatedMovie =  createMovies(movieId, movieName, series, imageUrl, description);
             updateMovie(movie.id, updatedMovie);
         });
@@ -71,6 +64,6 @@ public class EditMovieActivity extends BaseAddEditMovieActivity{
     }
 
     private void showEditBtn() {
-        editBtn.setVisibility(View.VISIBLE);
+        binding.editBtn.setVisibility(View.VISIBLE);
     }
 }

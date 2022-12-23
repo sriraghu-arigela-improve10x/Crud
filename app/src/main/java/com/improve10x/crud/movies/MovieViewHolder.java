@@ -9,17 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.improve10x.crud.R;
+import com.improve10x.crud.databinding.MessageItemBinding;
+import com.improve10x.crud.databinding.MovieItemBinding;
 
 public class MovieViewHolder extends RecyclerView.ViewHolder {
+    MovieItemBinding binding;
 
-    ImageView movieImg;
-    TextView movieNameTxt;
-    ImageButton deleteBtn;
-
-    public MovieViewHolder(@NonNull View itemView) {
-        super(itemView);
-        movieImg = itemView.findViewById(R.id.movie_img);
-        movieNameTxt = itemView.findViewById(R.id.movie_name_txt);
-        deleteBtn = itemView.findViewById(R.id.delete_btn);
+    public MovieViewHolder(MovieItemBinding movieItemBinding) {
+        super(movieItemBinding.getRoot());
+        binding = movieItemBinding;
     }
 }
