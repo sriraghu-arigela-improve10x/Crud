@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.improve10x.crud.R;
+import com.improve10x.crud.databinding.TemplateItemBinding;
 
 import java.util.List;
 
@@ -28,16 +29,16 @@ public class TemplatesAdapter extends RecyclerView.Adapter<TemplateViewHolder> {
     @NonNull
     @Override
     public TemplateViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.template_item, parent, false);
-        TemplateViewHolder templatesViewHolder = new TemplateViewHolder(view);
+        TemplateItemBinding binding = TemplateItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        TemplateViewHolder templatesViewHolder = new TemplateViewHolder(binding);
         return templatesViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull TemplateViewHolder holder, int position) {
         Template template = templateList.get(position);
-        holder.templateTxt.setText(template.messageText);
-        holder.deleteBtn.setOnClickListener(view -> {
+        holder.binding.templateTxt.setText(template.messageText);
+        holder.binding.deleteBtn.setOnClickListener(view -> {
             onItemActionListener.onItemDelete(template);
         });
         holder.itemView.setOnClickListener(view -> {

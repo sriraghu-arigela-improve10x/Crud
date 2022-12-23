@@ -11,27 +11,23 @@ import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
 import com.improve10x.crud.base.BaseActivity;
+import com.improve10x.crud.databinding.ActivityAddTemplateBinding;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BaseAddEditTemplateActivity extends BaseActivity {
-
+    protected ActivityAddTemplateBinding binding;
     protected CrudService crudService;
-    protected EditText templateMessageTxt;
     protected Template template;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_template);
-        setupViews();
+        binding = ActivityAddTemplateBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         setupAPiService();
-    }
-
-    private void setupViews() {
-        templateMessageTxt = findViewById(R.id.template_message_txt);
     }
 
     private void setupAPiService() {

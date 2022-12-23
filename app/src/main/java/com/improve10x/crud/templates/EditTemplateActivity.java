@@ -14,12 +14,9 @@ import retrofit2.Response;
 
 public class EditTemplateActivity extends BaseAddEditTemplateActivity {
 
-    private Button editBtn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupViews();
         Intent intent = getIntent();
         if(intent.hasExtra(Constants.KEY_TEMPLATE)) {
             getSupportActionBar().setTitle("Edit Template");
@@ -30,21 +27,17 @@ public class EditTemplateActivity extends BaseAddEditTemplateActivity {
         }
     }
 
-    private void setupViews() {
-        editBtn = findViewById(R.id.edit_btn);
-    }
-
     private void showData() {
-        templateMessageTxt.setText(template.messageText);
+        binding.templateMessageTxt.setText(template.messageText);
     }
 
     private void showEditBtn() {
-        editBtn.setVisibility(View.VISIBLE);
+        binding.editBtn.setVisibility(View.VISIBLE);
     }
 
     private void handleEdit() {
-        editBtn.setOnClickListener(view -> {
-            String templateMessage = templateMessageTxt.getText().toString();
+        binding.editBtn.setOnClickListener(view -> {
+            String templateMessage = binding.templateMessageTxt.getText().toString();
             Template updatedTemplate = createTemplate(templateMessage);
             updateTemplate(template.id, updatedTemplate);
         });

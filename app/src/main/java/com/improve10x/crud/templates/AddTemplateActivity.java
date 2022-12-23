@@ -12,25 +12,18 @@ import retrofit2.Response;
 
 public class AddTemplateActivity extends BaseAddEditTemplateActivity {
 
-    private Button addBtn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupViews();
         getSupportActionBar().setTitle("Add Template");
         handleAdd();
         showAddBtn();
 
     }
 
-    private void setupViews() {
-        addBtn = findViewById(R.id.add_btn);
-    }
-
     private void handleAdd() {
-        addBtn.setOnClickListener(view -> {
-            String templateMessage = templateMessageTxt.getText().toString();
+        binding.addBtn.setOnClickListener(view -> {
+            String templateMessage = binding.templateMessageTxt.getText().toString();
             Template template = createTemplate(templateMessage);
             saveTemplate(template);
         });
@@ -54,6 +47,6 @@ public class AddTemplateActivity extends BaseAddEditTemplateActivity {
     }
 
     private void showAddBtn() {
-        addBtn.setVisibility(View.VISIBLE);
+       binding.addBtn.setVisibility(View.VISIBLE);
     }
 }

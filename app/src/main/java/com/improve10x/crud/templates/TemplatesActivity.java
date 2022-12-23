@@ -12,6 +12,7 @@ import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
 import com.improve10x.crud.base.BaseActivity;
+import com.improve10x.crud.databinding.ActivityTemplatesBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,16 +22,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TemplatesActivity extends BaseActivity {
-
+    private ActivityTemplatesBinding binding;
     private CrudService crudService;
     private ArrayList<Template> templateList;
-    private RecyclerView templateRv;
     private TemplatesAdapter templatesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_templates);
+         binding = ActivityTemplatesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Templates");
         handleAdd();
         setupApiService();
@@ -63,7 +64,7 @@ public class TemplatesActivity extends BaseActivity {
                 showToast("On Item Edit");
             }
         });
-        templateRv.setAdapter(templatesAdapter);
+        binding.templateRv.setAdapter(templatesAdapter);
     }
 
     private void setupApiService() {
@@ -111,16 +112,14 @@ public class TemplatesActivity extends BaseActivity {
     }
 
     private void handleAdd() {
-        Button addBtn = findViewById(R.id.add_btn);
-        addBtn.setOnClickListener(view -> {
+        binding.addBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddTemplateActivity.class);
             startActivity(intent);
         });
     }
 
     private void setupTemplatesRv() {
-        templateRv = findViewById(R.id.template_rv);
-        templateRv.setLayoutManager(new LinearLayoutManager(this));
+        binding.templateRv.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void setupData() {
