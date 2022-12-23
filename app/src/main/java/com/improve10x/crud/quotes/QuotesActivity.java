@@ -12,6 +12,7 @@ import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
 import com.improve10x.crud.base.BaseActivity;
+import com.improve10x.crud.databinding.ActivityQuotesBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +22,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class QuotesActivity extends BaseActivity {
+    private ActivityQuotesBinding binding;
     private CrudService crudService;
     private ArrayList<Quote> quotes;
     private QuotesAdapter quotesAdapter;
-    private RecyclerView quoteRv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quotes);
+        binding = ActivityQuotesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Quotes");
         handleAdd();
         setupData();
@@ -38,8 +40,7 @@ public class QuotesActivity extends BaseActivity {
     }
 
     private void handleAdd() {
-        Button addBtn = findViewById(R.id.add_btn);
-        addBtn.setOnClickListener(view -> {
+        binding.addBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddQuoteActivity.class);
             startActivity(intent);
         });
@@ -95,7 +96,7 @@ public class QuotesActivity extends BaseActivity {
                 showToast("on item Edit");
             }
         });
-        quoteRv.setAdapter(quotesAdapter);
+        binding.quoteRv.setAdapter(quotesAdapter);
     }
 
     private void deleteQuote(Quote quote) {
@@ -115,8 +116,7 @@ public class QuotesActivity extends BaseActivity {
     }
 
     private void setupQuotesRv() {
-        quoteRv = findViewById(R.id.quote_rv);
-        quoteRv.setLayoutManager(new LinearLayoutManager(this));
+        binding.quoteRv.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void setupData() {

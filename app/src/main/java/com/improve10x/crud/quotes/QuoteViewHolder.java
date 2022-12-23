@@ -8,18 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.improve10x.crud.R;
+import com.improve10x.crud.databinding.QuoteItemBinding;
 
 public class QuoteViewHolder extends RecyclerView.ViewHolder {
-    ImageView quoteImageBtn;
-    TextView authorNameTxt;
-    TextView quoteTextTxt;
-    ImageView deleteBtn;
+    QuoteItemBinding binding;
 
-    public QuoteViewHolder(@NonNull View itemView) {
-        super(itemView);
-        quoteTextTxt = itemView.findViewById(R.id.quote_text_txt);
-        authorNameTxt = itemView.findViewById(R.id.authorname_txt);
-        quoteImageBtn = itemView.findViewById(R.id.quote_image_btn);
-        deleteBtn = itemView.findViewById(R.id.delete_btn);
+    public QuoteViewHolder(QuoteItemBinding quoteItemBinding) {
+        super(quoteItemBinding.getRoot());
+        binding = quoteItemBinding;
     }
 }

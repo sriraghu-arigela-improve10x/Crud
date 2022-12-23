@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.improve10x.crud.R;
+import com.improve10x.crud.databinding.ActivityQuotesBinding;
+import com.improve10x.crud.databinding.QuoteItemBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -31,21 +33,21 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuoteViewHolder> {
     @NonNull
     @Override
     public QuoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.quote_item, parent, false);
-        QuoteViewHolder quoteViewHolder = new QuoteViewHolder(view);
+        QuoteItemBinding binding = QuoteItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        QuoteViewHolder quoteViewHolder = new QuoteViewHolder(binding);
         return quoteViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull QuoteViewHolder holder, int position) {
         Quote quote = quotes.get(position);
-        holder.authorNameTxt.setText(quote.authorName);
-        holder.quoteTextTxt.setText(quote.quoteText);
+        holder.binding.authornameTxt.setText(quote.authorName);
+        holder.binding.quoteTextTxt.setText(quote.quoteText);
         if (quote.imageUrl != null && quote.imageUrl.isEmpty() == false) {
-            Picasso.get().load(quote.imageUrl).into(holder.quoteImageBtn);
+            Picasso.get().load(quote.imageUrl).into(holder.binding.quoteImageBtn);
         }
 
-        holder.deleteBtn.setOnClickListener(view -> {
+        holder.binding.deleteBtn.setOnClickListener(view -> {
             onItemActionListener.onItemDeleted(quote);
         });
         holder.itemView.setOnClickListener(view -> {

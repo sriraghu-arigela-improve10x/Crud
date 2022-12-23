@@ -11,27 +11,25 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddQuoteActivity extends BaseAddEditQuoteActivity {
-    private Button addBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupViews();
         getSupportActionBar().setTitle("Add Quote");
         showAddBtn();
         handleAddBtn();
     }
 
     private void showAddBtn() {
-        addBtn.setVisibility(View.VISIBLE);
+        binding.addBtn.setVisibility(View.VISIBLE);
     }
 
     private void handleAddBtn() {
-        addBtn.setOnClickListener(view -> {
-            String quotes = quoteTxt.getText().toString();
-            String authorName = authorNameTxt.getText().toString();
-            String category = categoryTxt.getText().toString();
-            String imageUrl = imageUrlTxt.getText().toString();
+        binding.addBtn.setOnClickListener(view -> {
+            String quotes = binding.quoteTxt.getText().toString();
+            String authorName = binding.authorNameTxt.getText().toString();
+            String category = binding.categoryTxt.getText().toString();
+            String imageUrl = binding.imageurlTxt.getText().toString();
             Quote quote = createQuote(quotes, authorName, category, imageUrl);
             saveQuote(quote);
         });
@@ -51,9 +49,5 @@ public class AddQuoteActivity extends BaseAddEditQuoteActivity {
                 showToast("Try Again");
             }
         });
-    }
-
-    private void setupViews() {
-        addBtn = findViewById(R.id.add_btn);
     }
 }

@@ -11,33 +11,23 @@ import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
 import com.improve10x.crud.base.BaseActivity;
+import com.improve10x.crud.databinding.ActivityAddEditQuoteActivtyBinding;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BaseAddEditQuoteActivity extends BaseActivity {
-
+    protected ActivityAddEditQuoteActivtyBinding binding;
     protected CrudService crudService;
-    protected EditText quoteTxt;
-    protected EditText authorNameTxt;
-    protected EditText categoryTxt;
-    protected EditText imageUrlTxt;
     protected Quote quote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_edit_quote_activty);
-        setupViews();
+        binding = ActivityAddEditQuoteActivtyBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         setupApi();
-    }
-
-    private void setupViews() {
-        quoteTxt = findViewById(R.id.quote_txt);
-        authorNameTxt = findViewById(R.id.author_name_txt);
-        categoryTxt = findViewById(R.id.category_txt);
-        imageUrlTxt = findViewById(R.id.imageurl_txt);
     }
 
     private void setupApi() {
