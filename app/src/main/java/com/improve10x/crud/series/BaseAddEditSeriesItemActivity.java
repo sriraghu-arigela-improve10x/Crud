@@ -11,31 +11,23 @@ import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
 import com.improve10x.crud.base.BaseActivity;
+import com.improve10x.crud.databinding.ActivityAddSeriesBinding;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BaseAddEditSeriesItemActivity extends BaseActivity {
-
+    protected ActivityAddSeriesBinding binding;
     protected CrudService crudService;
-    protected EditText seriesIdTxt;
-    protected EditText seriesNameTxt;
-    protected EditText seriesImageUrlTxt;
     protected SeriesItem seriesItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_series);
-        setupViews();
+        binding = ActivityAddSeriesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         setupApiService();
-    }
-
-    private void setupViews() {
-        seriesIdTxt = findViewById(R.id.seriesid_txt);
-        seriesNameTxt = findViewById(R.id.series_name_txt);
-        seriesImageUrlTxt = findViewById(R.id.image_url_txt);
     }
 
     private void setupApiService() {

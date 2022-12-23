@@ -14,12 +14,9 @@ import retrofit2.Response;
 
 public class EditSeriesItemActivity extends BaseAddEditSeriesItemActivity {
 
-    private Button editBtn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupViews();
         Intent intent = getIntent();
         if(intent.hasExtra(Constants.KEY_SERIES)) {
             getSupportActionBar().setTitle("Edit SeriesItem");
@@ -30,21 +27,17 @@ public class EditSeriesItemActivity extends BaseAddEditSeriesItemActivity {
         }
     }
 
-    private void setupViews() {
-        editBtn = findViewById(R.id.edit_btn);
-    }
-
     private void showData() {
-        seriesIdTxt.setText(seriesItem.seriesId);
-        seriesNameTxt.setText(seriesItem.title);
-        seriesImageUrlTxt.setText(seriesItem.imageUrl);
+        binding.seriesidTxt.setText(seriesItem.seriesId);
+        binding.seriesNameTxt.setText(seriesItem.title);
+        binding.imageUrlTxt.setText(seriesItem.imageUrl);
     }
 
     private void handleEdit() {
-        editBtn.setOnClickListener(view -> {
-            String seriesId = seriesIdTxt.getText().toString();
-            String seriesName = seriesNameTxt.getText().toString();
-            String imageUrl = seriesImageUrlTxt.getText().toString();
+        binding.editBtn.setOnClickListener(view -> {
+            String seriesId = binding.seriesidTxt.getText().toString();
+            String seriesName = binding.seriesNameTxt.getText().toString();
+            String imageUrl = binding.imageUrlTxt.getText().toString();
             SeriesItem updatedSeriesItem = createSeriesItems(seriesId, seriesName, imageUrl);
             updateSeriesItem(seriesItem.id, updatedSeriesItem);
         });
@@ -67,6 +60,6 @@ public class EditSeriesItemActivity extends BaseAddEditSeriesItemActivity {
     }
 
     private void showEditBtn() {
-        editBtn.setVisibility(View.VISIBLE);
+        binding.editBtn.setVisibility(View.VISIBLE);
     }
 }

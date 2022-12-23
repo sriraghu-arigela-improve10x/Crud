@@ -12,6 +12,8 @@ import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
 import com.improve10x.crud.base.BaseActivity;
+import com.improve10x.crud.databinding.ActivityAddSeriesBinding;
+import com.improve10x.crud.databinding.ActivitySeriesBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,16 +23,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SeriesItemsActivity extends BaseActivity {
-
+    private ActivitySeriesBinding binding;
     private CrudService crudService;
     private ArrayList<SeriesItem> seriesList;
-    private RecyclerView seriesItemsRv;
     private SeriesItemsAdapter seriesItemsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_series);
+        binding = ActivitySeriesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Series");
         setupApiService();
         handleAdd();
@@ -63,7 +65,7 @@ public class SeriesItemsActivity extends BaseActivity {
                 showToast("On Item Edit");
             }
         });
-        seriesItemsRv.setAdapter(seriesItemsAdapter);
+        binding.siriesRv.setAdapter(seriesItemsAdapter);
     }
 
     private void setupApiService() {
@@ -111,16 +113,14 @@ public class SeriesItemsActivity extends BaseActivity {
     }
 
     private void handleAdd() {
-        Button addBtn = findViewById(R.id.add_btn);
-        addBtn.setOnClickListener(view -> {
+        binding.addBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddSeriesItemActivity.class);
             startActivity(intent);
         });
     }
 
     private void setupSeriesItemsRv() {
-        seriesItemsRv = findViewById(R.id.siries_rv);
-        seriesItemsRv.setLayoutManager(new LinearLayoutManager(this));
+        binding.siriesRv.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void setupData() {

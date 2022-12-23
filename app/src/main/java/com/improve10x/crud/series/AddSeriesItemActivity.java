@@ -12,26 +12,19 @@ import retrofit2.Response;
 
 public class AddSeriesItemActivity extends BaseAddEditSeriesItemActivity {
 
-    private Button addBtn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupViews();
         getSupportActionBar().setTitle("Add SeriesItem");
         handleAdd();
         showAddBtn();
     }
 
-    private void setupViews() {
-        addBtn = findViewById(R.id.add_btn);
-    }
-
     private void handleAdd() {
-        addBtn.setOnClickListener(view -> {
-            String seriesId = seriesIdTxt.getText().toString();
-            String seriesName = seriesNameTxt.getText().toString();
-            String imageUrl = seriesImageUrlTxt.getText().toString();
+        binding.addBtn.setOnClickListener(view -> {
+            String seriesId = binding.seriesidTxt.getText().toString();
+            String seriesName = binding.seriesNameTxt.getText().toString();
+            String imageUrl = binding.imageUrlTxt.getText().toString();
             SeriesItem seriesItem =  createSeriesItems(seriesId, seriesName, imageUrl);
             saveMessage(seriesItem);
         });
@@ -54,6 +47,6 @@ public class AddSeriesItemActivity extends BaseAddEditSeriesItemActivity {
     }
 
     private void showAddBtn() {
-        addBtn.setVisibility(View.VISIBLE);
+        binding.addBtn.setVisibility(View.VISIBLE);
     }
 }
