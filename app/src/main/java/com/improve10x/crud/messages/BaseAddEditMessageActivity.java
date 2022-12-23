@@ -11,36 +11,28 @@ import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
 import com.improve10x.crud.base.BaseActivity;
+import com.improve10x.crud.databinding.ActivityAddMessageBinding;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BaseAddEditMessageActivity extends BaseActivity {
-
+    protected ActivityAddMessageBinding binding;
     protected CrudService crudService;
-    protected EditText nameTxt;
-    protected EditText phoneNumberTxt;
-    protected EditText addMessageTxt;
     protected Message message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_message);
-        setupViews();
+        binding = ActivityAddMessageBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         setupApiService();
     }
 
     private void setupApiService() {
         CrudApi crudApi = new CrudApi();
         crudService = crudApi.createCrudService();
-    }
-
-    private void setupViews() {
-        nameTxt = findViewById(R.id.name_txt);
-        phoneNumberTxt = findViewById(R.id.phone_number_txt);
-        addMessageTxt = findViewById(R.id.add_message_txt);
     }
 
     protected Message createMessage(String name, String phoneNumber, String addMessage) {

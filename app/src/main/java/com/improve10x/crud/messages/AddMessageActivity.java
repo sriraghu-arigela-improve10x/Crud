@@ -12,30 +12,25 @@ import retrofit2.Response;
 
 public class AddMessageActivity extends BaseAddEditMessageActivity{
 
-    private Button addBtn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("Add Message");
-        setupViews();
         showAddBtn();
         handleAdd();
     }
 
-    private void setupViews() {
-        addBtn = findViewById(R.id.add_btn);
-    }
+
 
     private void showAddBtn() {
-        addBtn.setVisibility(View.VISIBLE);
+       binding.addBtn.setVisibility(View.VISIBLE);
     }
 
     private void handleAdd() {
-        addBtn.setOnClickListener(view -> {
-            String name = nameTxt.getText().toString();
-            String phoneNumber = phoneNumberTxt.getText().toString();
-            String addMessage = addMessageTxt.getText().toString();
+        binding.addBtn.setOnClickListener(view -> {
+            String name = binding.nameTxt.getText().toString();
+            String phoneNumber = binding.phoneNumberTxt.getText().toString();
+            String addMessage = binding.addMessageTxt.getText().toString();
             Message message = createMessage(name, phoneNumber, addMessage);
             saveMessage(message);
         });

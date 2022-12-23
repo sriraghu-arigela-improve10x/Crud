@@ -8,19 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.improve10x.crud.R;
+import com.improve10x.crud.databinding.MessageItemBinding;
 
 public class MessageViewHolder extends RecyclerView.ViewHolder {
+     MessageItemBinding binding;
 
-     TextView titleTxt;
-     TextView numberTxt;
-     TextView messageTextTxt;
-     ImageView deleteBtn;
-
-    public MessageViewHolder(@NonNull View itemView) {
-        super(itemView);
-        titleTxt = itemView.findViewById(R.id.title_txt);
-        numberTxt = itemView.findViewById(R.id.number_txt);
-        messageTextTxt = itemView.findViewById(R.id.message_txt);
-        deleteBtn = itemView.findViewById(R.id.delete_btn);
+    public MessageViewHolder(MessageItemBinding messageItemBinding) {
+        super(messageItemBinding.getRoot());
+        binding = messageItemBinding;
     }
 }

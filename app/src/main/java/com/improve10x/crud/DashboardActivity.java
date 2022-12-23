@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.improve10x.crud.databinding.ActivityDashboardBinding;
 import com.improve10x.crud.messages.MessagesActivity;
 import com.improve10x.crud.movies.MoviesActivity;
 import com.improve10x.crud.quotes.QuotesActivity;
@@ -14,11 +15,12 @@ import com.improve10x.crud.series.SeriesItemsActivity;
 import com.improve10x.crud.templates.TemplatesActivity;
 
 public class DashboardActivity extends AppCompatActivity {
-
+    private ActivityDashboardBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        binding = ActivityDashboardBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Dashboard");
         handleMessageBtn();
         handleTemplatesBtn();
@@ -28,40 +30,35 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public void handleMessageBtn() {
-        ImageButton imageButton = findViewById(R.id.image_btn);
-        imageButton.setOnClickListener(view -> {
+        binding.imageBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this, MessagesActivity.class);
             startActivity(intent);
         });
     }
 
     public void handleTemplatesBtn() {
-        ImageButton templateImageBtn = findViewById(R.id.template_img_btn);
-        templateImageBtn.setOnClickListener(view -> {
+        binding.templateImgBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this, TemplatesActivity.class);
             startActivity(intent);
         });
     }
 
     public void handleSeriesBtn() {
-       ImageButton seriesImageBtn = findViewById(R.id.series_img_btn);
-       seriesImageBtn.setOnClickListener(view -> {
+       binding.seriesImgBtn.setOnClickListener(view -> {
            Intent intent = new Intent(this, SeriesItemsActivity.class);
            startActivity(intent);
        });
     }
 
     public void handleMoviesBtn() {
-       ImageButton moviesImageBtn = findViewById(R.id.movies_img_btn);
-       moviesImageBtn.setOnClickListener(view -> {
+       binding.moviesImgBtn.setOnClickListener(view -> {
            Intent intent = new Intent(this, MoviesActivity.class);
            startActivity(intent);
        });
     }
 
     public void handleQuotesBtn() {
-        ImageButton quoteImgBtn = findViewById(R.id.quote_img_btn);
-        quoteImgBtn.setOnClickListener(view -> {
+        binding.quoteImgBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this, QuotesActivity.class);
             startActivity(intent);
         });

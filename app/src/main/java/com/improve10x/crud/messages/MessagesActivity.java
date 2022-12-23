@@ -12,6 +12,7 @@ import com.improve10x.crud.R;
 import com.improve10x.crud.api.CrudApi;
 import com.improve10x.crud.api.CrudService;
 import com.improve10x.crud.base.BaseActivity;
+import com.improve10x.crud.databinding.ActivityMessagesBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,16 +22,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MessagesActivity extends BaseActivity {
-
+    private ActivityMessagesBinding binding;
     private CrudService crudService;
     private ArrayList<Message> messageList;
-    private RecyclerView messagesRv;
     private MessagesAdapter messagesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_messages);
+        binding = ActivityMessagesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Messages");
         handleAdd();
         setupData();
@@ -63,7 +64,7 @@ public class MessagesActivity extends BaseActivity {
                 showToast("On Item Edit");
             }
         });
-        messagesRv.setAdapter(messagesAdapter);
+        binding.messagesRv.setAdapter(messagesAdapter);
     }
 
 
@@ -112,16 +113,14 @@ public class MessagesActivity extends BaseActivity {
     }
 
     private void handleAdd() {
-        Button addBtn = findViewById(R.id.add_btn);
-        addBtn.setOnClickListener(view -> {
+        binding.addBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this,AddMessageActivity.class);
             startActivity(intent);
         });
     }
 
     private void setupMessagesRv() {
-        messagesRv = findViewById(R.id.messages_rv);
-        messagesRv.setLayoutManager(new LinearLayoutManager(this));
+       binding.messagesRv.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void setupData() {
