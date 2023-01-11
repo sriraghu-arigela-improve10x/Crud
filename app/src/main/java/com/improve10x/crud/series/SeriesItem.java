@@ -6,10 +6,10 @@ import java.io.Serializable;
 
 public class SeriesItem implements Serializable {
     @SerializedName("_id")
-    String id;
-    String seriesId;
+    public String id;
+    public String seriesId;
     @SerializedName("title")
-    String title;
+    public String title;
     @SerializedName("imageUrl")
-    String imageUrl;
+    public String imageUrl;
 }

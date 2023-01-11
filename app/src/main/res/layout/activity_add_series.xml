@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="seriesItem"
+            type="com.improve10x.crud.series.SeriesItem" />
+    </data>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:ems="10"
+        android:text="@{seriesItem.seriesId}"
         android:inputType="textPersonName" />
 
     <TextView
@@ -38,6 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:ems="10"
+        android:text="@{seriesItem.title}"
         android:inputType="textPersonName" />
 
     <TextView
@@ -54,6 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:ems="10"
+        android:text="@{seriesItem.imageUrl}"
         android:inputType="textPersonName" />
 
 
@@ -84,3 +95,4 @@
         android:visibility="gone" />
 
 </LinearLayout>
+</layout>
