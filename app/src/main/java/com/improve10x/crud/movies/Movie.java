@@ -6,18 +6,18 @@ import java.io.Serializable;
 
 public class Movie implements Serializable {
     @SerializedName("_id")
-    String id;
-    String movieId;
+    public String id;
+    public String movieId;
 
     @SerializedName("name")
-    String name;
+    public String name;
 
     @SerializedName("seriesId")
-    String movieSeriesId;
+    public String movieSeriesId;
 
     @SerializedName("imageUrl")
-    String imageUrl;
+    public String imageUrl;
 
     @SerializedName("description")
-    String description;
+    public String description;
 }

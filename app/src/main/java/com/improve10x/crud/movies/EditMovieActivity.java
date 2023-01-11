@@ -28,11 +28,7 @@ public class EditMovieActivity extends BaseAddEditMovieActivity{
     }
 
     private void showData() {
-        binding.movieIdTxt.setText(movie.movieId);
-        binding.movieNameTxt.setText(movie.name);
-        binding.seriesTxt.setText(movie.movieSeriesId);
-        binding.imageUrlTxt.setText(movie.imageUrl);
-        binding.descriptionTxt.setText(movie.description);
+        binding.setMovie(movie);
     }
 
     private void handleEdit() {
