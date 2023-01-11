@@ -6,11 +6,11 @@ import java.io.Serializable;
 
 public class Template implements Serializable {
     @SerializedName("_id")
-    String id;
+    public String id;
 
     @SerializedName("title")
-    String title;
+    public String title;
 
     @SerializedName("messageText")
-    String messageText;
+    public String messageText;
 }
