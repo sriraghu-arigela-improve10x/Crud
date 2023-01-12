@@ -3,4 +3,16 @@
     <string name="name">Name</string>
     <string name="phone_number">PhoneNumber</string>
     <string name="message">Message</string>
+    <string name="add">Add</string>
+    <string name="edit">Edit</string>
+    <string name="movie_id">MovieId</string>
+    <string name="movie_name">MovieName</string>
+    <string name="series">Series</string>
+    <string name="image_url">ImageUrl</string>
+    <string name="description">Description</string>
+    <string name="quote">Quote</string>
+    <string name="author_name">AuthorName</string>
+    <string name="category">Category</string>
+    <string name="series_name">SeriesName</string>
+    <string name="series_id">SeriesId</string>
 </resources>

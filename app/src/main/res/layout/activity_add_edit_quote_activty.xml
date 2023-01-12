@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Quote"
-        android:textColor="#090707"
+        android:text="@string/quote"
+        android:textColor="@color/black"
         android:textSize="16sp" />
 
     <EditText
@@ -31,8 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Author Name"
-        android:textColor="#090707"
+        android:text="@string/author_name"
+        android:textColor="@color/black"
         android:textSize="16sp" />
 
     <EditText
@@ -47,8 +47,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Category"
-        android:textColor="#090707"
+        android:text="@string/category"
+        android:textColor="@color/black"
         android:textSize="16sp" />
 
     <EditText
@@ -62,8 +62,8 @@
         android:id="@+id/textView25"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Image Url"
-        android:textColor="#090707"
+        android:text="@string/image_url"
+        android:textColor="@color/black"
         android:textSize="16sp" />
 
     <EditText
@@ -84,18 +84,20 @@
             android:id="@+id/edit_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#00BCD4"
-            android:text="Edit"
+            android:backgroundTint="@color/sky_blue"
+            android:text="@string/edit"
             android:textSize="16sp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/add_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#00BCD4"
-            android:text="Add"
+            android:backgroundTint="@color/sky_blue"
+            android:text="@string/add"
             android:textSize="16sp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:visibility="visible" />
     </LinearLayout>
 </LinearLayout>
