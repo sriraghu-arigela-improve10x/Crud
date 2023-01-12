@@ -29,8 +29,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:gravity="center_horizontal"
-                android:text="Messages"
-                android:textColor="#090707" />
+                android:text="@string/message"
+                android:textColor="@color/black" />
 
             <ImageButton
                 android:id="@+id/template_img_btn"
@@ -45,8 +45,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:gravity="center_horizontal"
-                android:text="Templates"
-                android:textColor="#090707" />
+                android:text="@string/templates"
+                android:textColor="@color/black" />
 
             <ImageButton
                 android:id="@+id/series_img_btn"
@@ -76,8 +76,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:gravity="center_horizontal"
-                android:text="Movies"
-                android:textColor="#090707"
+                android:text="@string/movies"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <ImageButton
@@ -92,8 +92,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:gravity="center_horizontal"
-                android:text="Quote"
-                android:textColor="#090707"
+                android:text="@string/quote"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
         </LinearLayout>

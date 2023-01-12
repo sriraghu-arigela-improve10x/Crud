@@ -15,4 +15,8 @@
     <string name="category">Category</string>
     <string name="series_name">SeriesName</string>
     <string name="series_id">SeriesId</string>
+    <string name="templates">Templates</string>
+    <string name="movies">Movies</string>
+    <string name="curd">CURD</string>
+    <string name="powered_by">Poweredby</string>
 </resources>

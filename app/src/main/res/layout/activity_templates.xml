@@ -18,8 +18,8 @@
         android:id="@+id/add_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#00BCD4"
-        android:text="Add"
+        android:backgroundTint="@color/sky_blue"
+        android:text="@string/add"
         android:textAllCaps="false"
         android:textSize="16sp" />
 </LinearLayout>
